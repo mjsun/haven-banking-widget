@@ -4,9 +4,9 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent }  from './app.component';
-import { BankFormComponent } from './banking/bank-form.component';
+
 /* Feature Modules */
-import { ProductModule } from './products/product.module';
+import { BankFormComponent } from './banking/bank-form.component';
 
 @NgModule({
   imports: [
@@ -16,8 +16,7 @@ import { ProductModule } from './products/product.module';
       { path: 'bank', component: BankFormComponent },
       { path: '', redirectTo: 'bank', pathMatch: 'full' },
       { path: '**', redirectTo: 'bank', pathMatch: 'full' }
-    ]),
-    ProductModule
+    ])
   ],
   declarations: [
     AppComponent,
