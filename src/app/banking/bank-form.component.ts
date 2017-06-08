@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
+    selector: 'bank-widget',
     templateUrl: 'app/banking/bank-form.component.html'
 })
 export class BankFormComponent {
