@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule }   from '@angular/forms';
 
 /* Feature Modules */
 import { BankFormComponent } from './bank-form.component';
@@ -9,7 +10,8 @@ import { BankFormComponent } from './bank-form.component';
 @NgModule({
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   declarations: [
     BankFormComponent,
