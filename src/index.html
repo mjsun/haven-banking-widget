@@ -19,13 +19,15 @@
     <!-- Configure SystemJS -->
     <script src="systemjs.config.js"></script>
     <script>
-        System.import('main.js').catch(function(err){ console.error(err); });
+        System.import('main.bank.js').catch(function(err){ console.error(err); });
+        System.import('main.bene.js').catch(function(err){ console.error(err); });
     </script>
 </head>
 
 <body>
     <div class="container">
         <bank-widget></bank-widget>
+        <bene-widget></bene-widget>
     </div>
 </body>
 
