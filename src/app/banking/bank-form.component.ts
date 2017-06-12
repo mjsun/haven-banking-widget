@@ -3,6 +3,7 @@ import { iBankingInfo } from '../interface/iBankingInfo';
 
 
 @Component({
+    moduleId: module.id,
     selector: 'bank-widget',
     templateUrl: './bank-form.component.html'
 })
