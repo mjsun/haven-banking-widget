@@ -3,4 +3,6 @@ node_modules
 **/*.js
 **/*.js.map
 !systemjs.config.js
+!systemjs.config.inapp.js
 .DS_Store
+.idea

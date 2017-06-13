@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
+    moduleId: module.id,
     selector: 'bene-widget',
-    templateUrl: 'app/beneficiary/bene-form.component.html'
+    templateUrl: './bene-form.component.html'
 })
 export class BeneFormComponent {
       @Input()name: string;  
