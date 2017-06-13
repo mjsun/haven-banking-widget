@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { iBankingInfo } from '../interface/iBankingInfo';
 
 @Component({
+    moduleId: module.id,
     selector: 'bank-widget',
-    templateUrl: 'app/banking/bank-form.component.html'
+    templateUrl: './bank-form.component.html'
 })
 export class BankFormComponent implements OnInit {
     public pageTitle: string = 'Banking Form Info';

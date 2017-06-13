@@ -2,13 +2,13 @@
 <html>
 
 <head lang="en">
-    <title>Haven Banking Widget</title>
+    <title>Acme Product Management</title>
     <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="styles.css" rel="stylesheet" />
+    <link href="modules/product-management/src/styles.css" rel="stylesheet" />
 
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -17,7 +17,7 @@
     <script src="node_modules/systemjs/dist/system.src.js"></script>
 
     <!-- Configure SystemJS -->
-    <script src="systemjs.config.inapp.js"></script>
+    <script src="modules/product-management/src/systemjs.config.js"></script>
     <script>
         System.import('main.bank.js').catch(function(err){ console.error(err); });
         System.import('main.bene.js').catch(function(err){ console.error(err); });
