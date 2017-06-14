@@ -1,37 +1,95 @@
 <h1>Edit Bank Account</h1>
 <form>
   <div class="form-group">
-    <label for="account-holder">Account Holder</label>
-    <input type="text" name="accountholder" class="form-control" id="account-holder" [(ngModel)]="bankInfo.accountholder" #accountholder="ngModel">
-    <p>{{bankInfo.accountholder}} </p>
+    <div class="row">
+        <div class="col-xs-4" style="text-align:right;line-height:2em;">
+            <label  for="account-holder">Account Holder</label>
+        </div>
+        <div class="col-xs-8" style="padding-left: 0px">
+             <span class="col-xs-7">{{bankInfo.accountholder}}</span>
+        </div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="routing-number">Routing Number</label>
-    <input type="text" name="routing" class="form-control" id="routing-number"[(ngModel)]="bankInfo.routingNumber" #routing="ngModel">
-    <p>{{bankInfo.routingNumber}} </p>
+    <div class="row">
+      <div class="col-xs-4"></div>  
+      <div class="col-xs-3">
+          <label class="radio-inline">
+            <input type="radio" [ngModel]="{checked: bankInfo.accountType == 'checking'}" (ngModelChange)="bankInfo.accountType='checking'"  name="account-type" value="checking">
+            Checking
+        </label>
+      </div>
+      <div class="col-xs-3">
+          <label class="radio-inline">
+            <input type="radio" [ngModel]="{checked: bankInfo.accountType == 'saving'}"  (ngModelChange)="bankInfo.accountType='saving'" name="account-type" value="saving">
+            Saving
+          </label>
+      </div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="account-number">Account Number</label>
-    <input type="text" name="accountnumber" class="form-control" id="account-number" [(ngModel)]="bankInfo.accountNumber" #accountnumber="ngModel">
-    <p>{{bankInfo.accountNumber}} </p>
+    <div class="row">
+      <div class="col-xs-4" style="text-align:right;line-height:2em;">
+          <label for="routing-number">Routing Number</label>
+      </div>
+      <div class="col-xs-8">
+          <input type="text" name="routing" class="form-control" id="routing-number"[(ngModel)]="bankInfo.routingNumber" #routing="ngModel">
+      </div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="bank-name">Bank Name</label>
-    <input type="text" name="bankname" class="form-control" id="bank-name" [(ngModel)]="bankInfo.bankName" #bankname="ngModel">
-    <p>{{bankInfo.bankName}} </p>
+    <div class="row">
+      <div class="col-xs-4" style="text-align:right;line-height:2em;">
+         <label for="account-number">Account Number</label>
+      </div>
+      <div class="col-xs-8">
+          <input type="text" name="accountnumber" class="form-control" id="account-number" [(ngModel)]="bankInfo.accountNumber" #accountnumber="ngModel">
+      </div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="notes">Notes</label>
-    <textarea name="notes" rows="5" class="form-control" id="notes" [(ngModel)]="bankInfo.notes" #notes="ngModel"></textarea>
-    <p>{{bankInfo.notes}} </p>
+    <div class="row">
+      <div class="col-xs-4" style="text-align:right;line-height:2em;">
+         <label for="bank-name">Bank Name</label>
+      </div>
+      <div class="col-xs-8">
+         <input type="text" name="bankname" class="form-control" id="bank-name" [(ngModel)]="bankInfo.bankName" #bankname="ngModel">
+      </div>
+    </div>
   </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> I, David Owner, confirm that I have read above script over a recorded line.
-    </label>
+  <div class="row">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-8">
+        <img width="50%" src="app/banking/media/check_routing_account.png">
+    </div>
   </div>
-  <a>Cancel</a>
-  <button type="submit" class="btn btn-primary" (click)="updateBankInfo()">Submit</button>
+  
+  <div class="form-group" style="margin-top: 25px">
+    <div class="row">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-8">
+          <label>I authoriaze the Masssachusetts Mutual Life Insurance Company ("The Company") to debit [inset premium amount] 
+        on a monthly basis beginning on [insert effective date] from my bank account ending in {{bankInfo.accountNumber  | slice: -3}} via Electronic Funds Transfer (EFT).
+        This authorization will remain in effect until the Company receives notification of termination. I may revoke this authorization by calling 1-8448768-6774
+        or writing to the Company P.O.Box 305002 Nashville, TN 37230-5002</label>
+      </div>
+    </div> 
+  </div>
 
+  <div class="row">
+      <div class="col-xs-4" style="text-align:right;line-height:2em;">
+        <a>Cancel</a>
+      </div>  
+      <div class="col-xs-8">
+        <a href="javascript:void(0)" class="btn btn-default" style="width:80%;background-color:#ccc;color:white" (click)="updateBankInfo()">Authorize</a>
+      </div>  
+  </div>
+ 
+  <div class="row" style="margin-top:25px">
+      <div class="col-xs-4"></div>  
+      <div class="col-xs-8">
+        <a>Premium Payment Service Term & Conditions</a>
+      </div>  
+  </div>
 </form>
 

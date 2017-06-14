@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 /* Feature Modules */
 import { BankFormComponent } from './bank-form.component';
@@ -11,7 +12,8 @@ import { BankFormComponent } from './bank-form.component';
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   declarations: [
     BankFormComponent,

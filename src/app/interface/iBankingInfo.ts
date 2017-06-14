@@ -1,7 +1,8 @@
 export interface iBankingInfo {
     accountholder: string;
-    routingNumber: number;
-    accountNumber: number;
+    accountType: string;
+    routingNumber: string;
+    accountNumber: string;
     bankName: string;
     notes: string
 }

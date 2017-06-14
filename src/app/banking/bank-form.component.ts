@@ -16,8 +16,9 @@ export class BankFormComponent implements OnInit {
         this.policyId = '110000005'
         this.bankInfo = {
             accountholder: '',
-            routingNumber: 0,
-            accountNumber: 0,
+            accountType: '',
+            routingNumber: '',
+            accountNumber: '',
             bankName: '',
             notes: ''
         }; 
