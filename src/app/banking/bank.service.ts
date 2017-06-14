@@ -7,7 +7,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 import { iBankingInfo } from '../interface/IBankingInfo';
-import { BANKINFO } from './mock-bank';
 
 @Injectable()
 export class BankService {
@@ -16,7 +15,6 @@ export class BankService {
     constructor(private _http: Http) {}
 
     getBankInfo(policyId: string): Observable<iBankingInfo> {
-        let thisBankInfo = BANKINFO[policyId];
         return this._http.get(this._rootEntryUrl + '/banking_info/' + policyId)
             .map((response: Response) => <iBankingInfo> response.json());
     }
