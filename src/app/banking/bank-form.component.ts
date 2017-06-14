@@ -11,7 +11,9 @@ import { BankService } from './bank.service';
 export class BankFormComponent implements OnInit {
     public pageTitle: string = 'Banking Form Info';
     public bankInfo : iBankingInfo ;
-    constructor(private  bankService: BankService) {   
+    public policyId : string;
+    constructor(private  bankService: BankService) {
+        this.policyId = '110000005'
         this.bankInfo = {
             accountholder: '',
             routingNumber: 0,
@@ -19,16 +21,17 @@ export class BankFormComponent implements OnInit {
             bankName: '',
             notes: ''
         }; 
-      
     }
 
     ngOnInit()
     {
-        
-        this.bankService.getBankInfo(2).then(bankInfo => this.bankInfo = bankInfo);
+        this.bankService.getBankInfo(this.policyId)
+            .subscribe(bankInfo => this.bankInfo = bankInfo);
+    }
 
-    
-
+    updateBankInfo() {
+         this.bankService.postBankInfo(this.policyId, this.bankInfo)
+            .subscribe(bankInfo => console.log(bankInfo));
     }
 }
 
