@@ -12,6 +12,10 @@ export class BankFormComponent implements OnInit {
     public pageTitle: string = 'Banking Form Info';
     public bankInfo : iBankingInfo ;
     public policyId : string;
+    public accountType: any[] = [
+        {value: 'checking', display: 'Checking'},
+        {value: 'saving', display: 'Saving'}
+    ];
     constructor(private  bankService: BankService) {
         this.policyId = '110000005'
         this.bankInfo = {

@@ -12,18 +12,16 @@
   </div>
   <div class="form-group">
     <div class="row">
-      <div class="col-xs-4"></div>  
-      <div class="col-xs-3">
-          <label class="radio-inline">
-            <input type="radio" [ngModel]="{checked: bankInfo.accountType == 'checking'}" (ngModelChange)="bankInfo.accountType='checking'"  name="account-type" value="checking">
-            Checking
-        </label>
-      </div>
-      <div class="col-xs-3">
-          <label class="radio-inline">
-            <input type="radio" [ngModel]="{checked: bankInfo.accountType == 'saving'}"  (ngModelChange)="bankInfo.accountType='saving'" name="account-type" value="saving">
-            Saving
+      <div class="col-xs-4" style="text-align:right;line-height:2em;">
+          <label  for="account-holder">Account Type</label>
+      </div> 
+      <div *ngFor="let type of accountType">
+          <div class="col-xs-3">
+            <label class="radio-inline">
+              <input type="radio" name="account-type" [(ngModel)]="bankInfo.accountType" [value]="type.value">
+              {{type.display}}
           </label>
+        </div>
       </div>
     </div>
   </div>
@@ -81,7 +79,7 @@
         <a>Cancel</a>
       </div>  
       <div class="col-xs-8">
-        <a href="javascript:void(0)" class="btn btn-default" style="width:80%;background-color:#ccc;color:white" (click)="updateBankInfo()">Authorize</a>
+          <a href="javascript:void(0)" class="btn btn-default" style="width:80%;background-color:#ccc;color:white;" (click)="updateBankInfo()">Authorize</a>
       </div>  
   </div>
  
