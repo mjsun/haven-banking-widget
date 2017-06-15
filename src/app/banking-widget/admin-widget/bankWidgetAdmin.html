@@ -55,23 +55,55 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-4"></div>
-    <div class="col-xs-8">
-        <img width="50%" src="app/banking-widget/media/check_routing_account.png">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-4" style="text-align:right;line-height:2em;">
+         <label for="notes">Notes</label>
+      </div>
+      <div class="col-xs-8">
+         <textarea name="notes" class="form-control" id="notes" [(ngModel)]="bankInfo.notes" #notes="ngModel"></textarea>
+      </div>
     </div>
-  </div>
-  
-  <div class="form-group" style="margin-top: 25px">
+  </div>  
+  <div class="form-group">
     <div class="row">
       <div class="col-xs-4"></div>
       <div class="col-xs-8">
-          <label>I authoriaze the Masssachusetts Mutual Life Insurance Company ("The Company") to debit [inset premium amount] 
-        on a monthly basis beginning on [insert effective date] from my bank account ending in {{bankInfo.accountNumber  | slice: -3}} via Electronic Funds Transfer (EFT).
-        This authorization will remain in effect until the Company receives notification of termination. I may revoke this authorization by calling 1-8448768-6774
-        or writing to the Company P.O.Box 305002 Nashville, TN 37230-5002</label>
+         <hr>
+      </div>
+    </div>
+  </div>  
+  <div class="form-group" style="margin-top: 25px">
+    <div class="row">
+      <div class="col-xs-4" style="text-align:right;line-height:2em;">
+          <label>Script</label>
+      </div>
+      <div class="col-xs-8">
+          <span>[Customre's first and last name']; today, [current date] you authorize [Haven/MassMutual] 
+            to withdraw [$$] monthly from your [NAME OF BANK] checking/savings account
+            to pay your premium. The first draft will occur on [effective date of first, recurring premium] 
+            and [monthly date such as 15th of the month] thereafter. 
+            This authorization will remain in effect until you request cancellation by calling [1-xxx-xxx-xxxx] 
+            or writing to the Administrative Office address listed on your application.
+          </span>
       </div>
     </div> 
+  </div>
+  <div class="row">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-8">
+        <hr>
+    </div>
+  </div> 
+
+ <div class="row" style="margin-top:25px">
+      <div class="col-xs-4"></div>  
+      <div class="col-xs-8">
+        <label>
+          <input type="checkbox" name="confirmRead" [(ngModel)]="confirmRead">
+          <span>I, [CS Rep], confirm that I have read above script over a recorded line</span>
+        </label>
+      </div>  
   </div>
 
   <div class="row">
@@ -79,15 +111,9 @@
         <a>Cancel</a>
       </div>  
       <div class="col-xs-8">
-          <a href="javascript:void(0)" class="btn btn-default" style="width:80%;background-color:#ccc;color:white;" (click)="updateBankInfo()">Authorize</a>
+          <a href="javascript:void(0)" class="btn btn-default" style="width:80%;background-color:#ccc;color:white;" (click)="updateBankInfo()">Submit</a>
       </div>  
   </div>
  
-  <div class="row" style="margin-top:25px">
-      <div class="col-xs-4"></div>  
-      <div class="col-xs-8">
-        <a>Premium Payment Service Term & Conditions</a>
-      </div>  
-  </div>
 </form>
 

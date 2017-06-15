@@ -12,10 +12,8 @@ export class BankWidgetAdminComponent implements OnInit {
     public pageTitle: string = 'Banking Form Info';
     public bankInfo : iBankingInfo ;
     public policyId : string;
-    public accountType: any[] = [
-        {value: 'checking', display: 'Checking'},
-        {value: 'saving', display: 'Saving'}
-    ];
+    public accountType: any[];
+    public confirmRead: boolean;
     constructor(private  bankService: BankService) {
         this.policyId = '110000005'
         this.bankInfo = {
@@ -25,7 +23,13 @@ export class BankWidgetAdminComponent implements OnInit {
             accountNumber: '',
             bankName: '',
             notes: ''
-        }; 
+        };
+        this.accountType = [
+            {value: 'checking', display: 'Checking'},
+            {value: 'saving', display: 'Saving'}
+        ];
+        
+        this.confirmRead = false;
     }
 
     ngOnInit()
