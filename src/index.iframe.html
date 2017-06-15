@@ -20,14 +20,12 @@
     <script src="modules/product-management/src/systemjs.config.js"></script>
     <script>
         System.import('main.bank.js').catch(function(err){ console.error(err); });
-        System.import('main.bene.js').catch(function(err){ console.error(err); });
     </script>
 </head>
 
 <body>
     <div class="container">
-        <bank-widget></bank-widget>
-        <bene-widget></bene-widget>
+        <bank-widget-customer></bank-widget-customer>
     </div>
 </body>
 
