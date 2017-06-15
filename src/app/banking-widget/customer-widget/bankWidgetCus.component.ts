@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { iBankingInfo } from '../interface/iBankingInfo';
-import { BankService } from './bank.service';
+import { BankService } from '../service/bank.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'bank-widget',
-    templateUrl: './bank-form.component.html',
+    selector: 'bank-widget-customer',
+    templateUrl: './bankWidgetCus.html',
     providers: [BankService]
 })
-export class BankFormComponent implements OnInit {
+export class BankWidgetCusComponent implements OnInit {
     public pageTitle: string = 'Banking Form Info';
     public bankInfo : iBankingInfo ;
     public policyId : string;

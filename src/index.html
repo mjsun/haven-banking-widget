@@ -19,13 +19,13 @@
     <!-- Configure SystemJS -->
     <script src="systemjs.config.inapp.js"></script>
     <script>
-        System.import('main.bank.js').catch(function(err){ console.error(err); });
+        System.import('main.bank.customer.js').catch(function(err){ console.error(err); });
     </script>
 </head>
 
 <body>
     <div class="container">
-        <bank-widget></bank-widget>
+        <bank-widget-customer></bank-widget-customer>
     </div>
 </body>
 

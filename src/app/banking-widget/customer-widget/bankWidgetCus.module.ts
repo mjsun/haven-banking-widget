@@ -6,7 +6,7 @@ import { FormsModule }   from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 /* Feature Modules */
-import { BankFormComponent } from './bank-form.component';
+import { BankWidgetCusComponent } from './bankWidgetCus.component';
 
 @NgModule({
   imports: [
@@ -16,8 +16,8 @@ import { BankFormComponent } from './bank-form.component';
     CommonModule
   ],
   declarations: [
-    BankFormComponent,
+    BankWidgetCusComponent,
   ],
-  bootstrap: [ BankFormComponent ]
+  bootstrap: [ BankWidgetCusComponent ]
 })
-export class BankModule { }
+export class BankCustomerModule { }
