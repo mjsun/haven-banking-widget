@@ -18,7 +18,8 @@ export class BankWidgetCusComponent implements OnInit {
         {value: 'saving', display: 'Saving'}
     ];
     constructor(private  bankService: BankService, private windowService: WindowService) {
-        this.policyNumber = windowService.nativeWindow.parent.controller.customer.applicationPolicy.policyNumber;
+        let parentController: any = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller;
+        this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
         this.bankInfo = {
             accountholder: '',
             accountType: '',
