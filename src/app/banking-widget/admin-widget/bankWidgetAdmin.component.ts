@@ -16,7 +16,7 @@ export class BankWidgetAdminComponent implements OnInit {
     public accountType: any[];
     public confirmRead: boolean;
     constructor(private  bankService: BankService, private windowService: WindowService) {
-        this.policyNumber = windowService.nativeWindow.controller.customer.applicationPolicy.policyNumber;
+        this.policyNumber = windowService.nativeWindow.parent.controller.customer.applicationPolicy.policyNumber;
         this.bankInfo = {
             accountholder: '',
             accountType: '',
