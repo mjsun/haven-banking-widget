@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { iBankingInfo } from '../interface/iBankingInfo';
 import { BankService } from '../service/bank.service';
 import { WindowService } from '../../shared/window.service';
+import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
-    selector: 'bank-widget-customer',
     templateUrl: './bankWidgetCus.html',
     providers: [BankService, WindowService]
 })
@@ -17,7 +17,7 @@ export class BankWidgetCusComponent implements OnInit {
         {value: 'checking', display: 'Checking'},
         {value: 'saving', display: 'Saving'}
     ];
-    constructor(private  bankService: BankService, private windowService: WindowService) {
+    constructor(private  bankService: BankService, private windowService: WindowService, private router: Router) {
         let parentController: any = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller;
         this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
         this.bankInfo = {
@@ -38,7 +38,7 @@ export class BankWidgetCusComponent implements OnInit {
 
     updateBankInfo() {
          this.bankService.postBankInfo(this.policyNumber, this.bankInfo)
-            .subscribe(bankInfo => console.log(bankInfo));
+            .subscribe(bankInfo => this.router.navigate(['complete']));
     }
 }
 

@@ -1,23 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 /* Feature Modules */
 import { BankWidgetCusComponent } from './bankWidgetCus.component';
+import { CompleteCusComponent } from './complete.component';
+import { AppComponent } from './bankApp.component';
+
+const appRoutes: Routes = [
+    {path:'', component: BankWidgetCusComponent},
+    {path:'complete', component: CompleteCusComponent}
+]
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    RouterModule.forRoot(appRoutes)
   ],
   declarations: [
     BankWidgetCusComponent,
+    CompleteCusComponent,
+    AppComponent,
   ],
-  bootstrap: [ BankWidgetCusComponent ]
+  bootstrap: [ AppComponent ]
 })
 export class BankCustomerModule { }
