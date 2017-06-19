@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { iBankingInfo } from '../interface/iBankingInfo';
 import { BankService } from '../service/bank.service';
 import { WindowService } from '../../shared/window.service';
+import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -15,7 +16,7 @@ export class BankWidgetAdminComponent implements OnInit {
     public policyNumber : string;
     public accountType: any[];
     public confirmRead: boolean;
-    constructor(private  bankService: BankService, private windowService: WindowService) {
+    constructor(private  bankService: BankService, private windowService: WindowService, private router: Router) {
         let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller;
         this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
         this.bankInfo = {
@@ -42,7 +43,7 @@ export class BankWidgetAdminComponent implements OnInit {
 
     updateBankInfo() {
          this.bankService.postBankInfo(this.policyNumber, this.bankInfo)
-            .subscribe(bankInfo => console.log(bankInfo));
+            .subscribe(bankInfo =>  this.router.navigate(['complete']));
     }
 }
 

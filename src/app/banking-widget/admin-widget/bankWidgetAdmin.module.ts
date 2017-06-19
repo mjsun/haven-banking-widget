@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 
 /* Feature Modules */
 import { BankWidgetAdminComponent } from './bankWidgetAdmin.component';
+import { CompleteCusComponent } from './complete.component';
+import { AppComponent } from './bankApp.component';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { BankWidgetAdminComponent } from './bankWidgetAdmin.component';
   ],
   declarations: [
     BankWidgetAdminComponent,
+    CompleteCusComponent,
+    AppComponent
   ],
-  bootstrap: [ BankWidgetAdminComponent ]
+  bootstrap: [ AppComponent ]
 })
 export class BankAdminModule { }
