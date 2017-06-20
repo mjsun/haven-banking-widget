@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 import { iBankingInfo } from '../interface/IBankingInfo';
+import { ICustomerInfoAdmin } from '../interface/ICustomerInfoAdmin';
 
 @Injectable()
 export class BankService {
@@ -19,9 +20,13 @@ export class BankService {
             .map((response: Response) => <iBankingInfo> response.json());
     }
 
+    getCustomerInfo_admin(policyNumber: string): Observable<ICustomerInfoAdmin> {
+        return this._http.get(this._rootEntryUrl + '/customer_info/' + policyNumber)
+            .map((response: Response) => <ICustomerInfoAdmin> response.json());
+    }
+
     postBankInfo(policyId: string, bankInfo: iBankingInfo): Observable<iBankingInfo> {
         return this._http.put(this._rootEntryUrl + '/banking_info/' + policyId, bankInfo)
-        .map((response: Response) => <iBankingInfo> response.json());
-    } 
-
+            .map((response: Response) => <iBankingInfo> response.json());
+    }
 }

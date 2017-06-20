@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { iBankingInfo } from '../interface/iBankingInfo';
+import { ICustomerInfoAdmin } from '../interface/ICustomerInfoAdmin';
 import { BankService } from '../service/bank.service';
 import { WindowService } from '../../shared/window.service';
 import { Router } from '@angular/router';
@@ -13,20 +14,36 @@ import { Router } from '@angular/router';
 export class BankWidgetAdminComponent implements OnInit {
     public pageTitle: string = 'Banking Form Info';
     public bankInfo : iBankingInfo ;
+    public customerInfo : ICustomerInfoAdmin ;
     public policyNumber : string;
     public accountType: any[];
     public confirmRead: boolean;
     constructor(private  bankService: BankService, private windowService: WindowService, private router: Router) {
-        let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller;
-        this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
+        // let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller;
+        // this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
+        this.policyNumber = '110000001';
+        this.customerInfo = {
+            firstName: '',
+            lastName: '',
+            isPaymentOverDue: false,
+            currentDate: new Date(),
+            premiumAmt: 0.00,
+            bankName: '',
+            effectiveDate: new Date(),
+            effectiveDay: '',
+            helpLine: '',
+            helpAddr: ''
+        };
+
         this.bankInfo = {
             accountholder: '',
-            accountType: '',
+            accountType: 'checking',
             routingNumber: '',
             accountNumber: '',
             bankName: '',
             notes: ''
         };
+
         this.accountType = [
             {value: 'checking', display: 'Checking'},
             {value: 'saving', display: 'Saving'}
@@ -37,8 +54,10 @@ export class BankWidgetAdminComponent implements OnInit {
 
     ngOnInit()
     {
-        this.bankService.getBankInfo(this.policyNumber)
-            .subscribe(bankInfo => this.bankInfo = bankInfo);
+        this.bankService.getCustomerInfo_admin(this.policyNumber)
+            .subscribe(customerInfo => {
+                this.customerInfo = customerInfo;
+            });
     }
 
     updateBankInfo() {
