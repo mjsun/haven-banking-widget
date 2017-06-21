@@ -1,4 +1,4 @@
-<h1>Edit Bank Account {{policyNumber}}</h1>
+<h1>Edit Bank Account</h1>
 <form>
   <div class="form-group">
     <div class="row">
@@ -66,10 +66,10 @@
     <div class="row">
       <div class="col-xs-4"></div>
       <div class="col-xs-8">
-          <label>I authoriaze the Masssachusetts Mutual Life Insurance Company ("The Company") to debit [inset premium amount] 
-        on a monthly basis beginning on [insert effective date] from my bank account ending in {{bankInfo.accountNumber  | slice: -3}} via Electronic Funds Transfer (EFT).
-        This authorization will remain in effect until the Company receives notification of termination. I may revoke this authorization by calling 1-8448768-6774
-        or writing to the Company P.O.Box 305002 Nashville, TN 37230-5002</label>
+          <label>I authoriaze the Masssachusetts Mutual Life Insurance Company ("The Company") to debit {{customerInfo.premiumAmt| currency}}
+        on a monthly basis beginning on {{customerInfo.effectiveDate | date}} from my bank account <span *ngIf="bankInfo.accountNumber">ending in {{bankInfo.accountNumber  | slice: -3}} </span>via Electronic Funds Transfer (EFT).
+        This authorization will remain in effect until the Company receives notification of termination. I may revoke this authorization by calling {{customerInfo.helpLine}}
+        or writing to {{customerInfo.helpAddr}}</label>
       </div>
     </div> 
   </div>

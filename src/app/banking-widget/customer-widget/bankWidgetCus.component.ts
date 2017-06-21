@@ -21,22 +21,42 @@ export class BankWidgetCusComponent implements OnInit {
     ];
 
     constructor(private  bankService: BankService, private windowService: WindowService, private router: Router) {
-        // let parentController: any = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller;
-        // this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
-        this.policyNumber = '110000001';
+        let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller || {customer : {applicationPolicy: {policyNumber: '1'}}};
+        this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
+
+        this.customerInfo = {
+            firstName: '',
+            lastName: '',
+            isPaymentOverDue: false,
+            currentDate: new Date(),
+            premiumAmt: 0.00,
+            bankName: '',
+            effectiveDate: new Date(),
+            effectiveDay: '',
+            helpLine: '',
+            helpAddr: ''
+        };
+
         this.bankInfo = {
             accountholder: '',
-            accountType: '',
+            accountType: 'checking',
             routingNumber: '',
             accountNumber: '',
             bankName: '',
             notes: ''
         };
+
+        this.accountType = [
+            {value: 'checking', display: 'Checking'},
+            {value: 'saving', display: 'Saving'}
+        ];
     };
 
     ngOnInit() {
-        this.bankService.getBankInfo(this.policyNumber)
-            .subscribe(bankInfo => this.bankInfo = bankInfo);
+        this.bankService.getCustomerInfo_admin(this.policyNumber)
+            .subscribe(customerInfo => {
+                this.customerInfo = customerInfo;
+            });
     }
 
     updateBankInfo() {

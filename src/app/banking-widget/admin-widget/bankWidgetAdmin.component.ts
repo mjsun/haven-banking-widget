@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
-    selector: 'bank-widget-admin',
     templateUrl: './bankWidgetAdmin.html',
     providers: [BankService, WindowService]
 })
