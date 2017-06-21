@@ -19,9 +19,9 @@ export class BankWidgetAdminComponent implements OnInit {
     public accountType: any[];
     public confirmRead: boolean;
     constructor(private  bankService: BankService, private windowService: WindowService, private router: Router) {
-        // let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller;
-        // this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
-        this.policyNumber = '110000001';
+        let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller || {customer : {applicationPolicy: {policyNumber: '1'}}};
+        this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
+
         this.customerInfo = {
             firstName: '',
             lastName: '',

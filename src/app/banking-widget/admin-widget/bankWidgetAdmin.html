@@ -1,4 +1,4 @@
-<h1>Edit Bank Account {{policyNumber}}</h1>
+<h1>Edit Bank Account</h1>
 <form>
   <div *ngIf="customerInfo.isPaymentOverDue">
       <label>Payment on this policy is overdue.</label>
@@ -115,7 +115,7 @@
         <a>Cancel</a>
       </div>  
       <div class="col-xs-8">
-          <a href="javascript:void(0)" class="btn btn-default" style="width:80%;background-color:#ccc;color:white;" (click)="updateBankInfo()">Submit</a>
+          <button type="submit" class="btn btn-primary" style="width:80%;color:white;" (click)="updateBankInfo()" [disabled]="!confirmRead">Submit</button>
       </div>  
   </div>
  
