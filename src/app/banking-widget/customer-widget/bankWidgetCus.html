@@ -1,5 +1,5 @@
 <h1>Edit Bank Account</h1>
-<form>
+<form #heroForm="ngForm" >
   <div class="form-group">
     <div class="row">
         <div class="col-xs-4" style="text-align:right;line-height:2em;">
@@ -28,10 +28,31 @@
   <div class="form-group">
     <div class="row">
       <div class="col-xs-4" style="text-align:right;line-height:2em;">
-          <label for="routing-number">Routing Number</label>
+          <label for="routing_number">Routing Number</label>
       </div>
       <div class="col-xs-8">
-          <input type="text" name="routing" class="form-control" id="routing-number"[(ngModel)]="bankInfo.routingNumber" #routing="ngModel">
+          <input type="number"
+                 name="routing_number"
+                 class="form-control"
+                 id="routing_number"
+                 [(ngModel)]="bankInfo.routingNumber"
+                 #routing_number="ngModel"
+                 minlength="9"
+           
+          required>
+          <div *ngIf="routing_number.errors && (routing_number.dirty || routing_number.touched)"
+               class="alert alert-danger">
+              <div [hidden]="!routing_number.errors.required">
+                  Routing number is required
+              </div>
+              <div [hidden]="!routing_number.errors.minlength">
+                  Routing number must be 9 characters long.
+              </div>
+              <div [hidden]="!routing_number.errors.maxlength">
+                  Routing number must be 9 characters long.
+              </div>
+              {{routing_number.errors | json}}
+          </div>
       </div>
     </div>
   </div>
