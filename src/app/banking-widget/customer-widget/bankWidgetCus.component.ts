@@ -1,17 +1,17 @@
-import { Component, AfterViewChecked, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { iBankingInfo } from '../interface/iBankingInfo';
 import { ICustomerInfoAdmin } from '../interface/ICustomerInfoAdmin';
 import { BankService } from '../service/bank.service';
 import { WindowService } from '../../shared/window.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
     moduleId: module.id,
     templateUrl: './bankWidgetCus.html',
     providers: [BankService, WindowService]
 })
-export class BankWidgetCusComponent implements OnInit, AfterViewChecked {
+export class BankWidgetCusComponent implements OnInit {
     public pageTitle: string = 'Banking Form Info';
     public bankInfo: iBankingInfo ;
     public customerInfo: ICustomerInfoAdmin;
@@ -20,10 +20,9 @@ export class BankWidgetCusComponent implements OnInit, AfterViewChecked {
         {value: 'checking', display: 'Checking'},
         {value: 'saving', display: 'Saving'}
     ];
-    heroForm: NgForm;
-    @ViewChild('heroForm') currentForm: NgForm;
+    public bankInfoForm: FormGroup;
 
-    constructor(private  bankService: BankService, private windowService: WindowService, private router: Router) {
+    constructor(private  bankService: BankService, private windowService: WindowService, private router: Router, private fb: FormBuilder) {
         let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller || {customer : {applicationPolicy: {policyNumber: '1'}}};
         this.policyNumber ='110000001' || parentController.customer.applicationPolicy.policyNumber;
 
@@ -53,7 +52,19 @@ export class BankWidgetCusComponent implements OnInit, AfterViewChecked {
             {value: 'checking', display: 'Checking'},
             {value: 'saving', display: 'Saving'}
         ];
+
+        this.bankInfoForm = fb.group({
+            'accountType': [null, Validators.required],
+            'routing_number': [null, Validators.required],
+            'accountNumber': [null],
+            'bankName': [null]
+        });
+
     };
+
+    submitForm(value: any){
+        console.log(value);
+    }
 
     ngOnInit() {
         this.bankService.getCustomerInfo_admin(this.policyNumber)
@@ -62,54 +73,6 @@ export class BankWidgetCusComponent implements OnInit, AfterViewChecked {
             });
     }
 
-    ngAfterViewChecked() {
-        // this.formChanged();
-        // alert('test');
-    }
-    //
-    // formChanged() {
-    //     if (this.currentForm === this.heroForm) { return; }
-    //     this.heroForm = this.currentForm;
-    //     if (this.heroForm) {
-    //         this.heroForm.valueChanges
-    //             .subscribe(data => this.onValueChanged(data));
-    //     }
-    // }
-    //
-    // onValueChanged(data?: any) {
-    //     if (!this.heroForm) { return; }
-    //     const form = this.heroForm.form;
-    //
-    //     for (const field in this.formErrors) {
-    //         // clear previous error message (if any)
-    //         this.formErrors[field] = '';
-    //         const control = form.get(field);
-    //
-    //         if (control && control.dirty && !control.valid) {
-    //             const messages = this.validationMessages[field];
-    //             for (const key in control.errors) {
-    //                 this.formErrors[field] += messages[key] + ' ';
-    //             }
-    //         }
-    //     }
-    // }
-    //
-    // formErrors = {
-    //     'name': '',
-    //     'power': ''
-    // };
-    //
-    // validationMessages = {
-    //     'name': {
-    //         'required':      'Name is required.',
-    //         'minlength':     'Name must be at least 4 characters long.',
-    //         'maxlength':     'Name cannot be more than 24 characters long.',
-    //         'forbiddenName': 'Someone named "Bob" cannot be a hero.'
-    //     },
-    //     'power': {
-    //         'required': 'Power is required.'
-    //     }
-    // };
 
     updateBankInfo() {
         this.bankService.postBankInfo(this.policyNumber, this.bankInfo)

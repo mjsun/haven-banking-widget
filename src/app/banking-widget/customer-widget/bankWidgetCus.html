@@ -1,5 +1,5 @@
 <h1>Edit Bank Account</h1>
-<form #heroForm="ngForm" >
+<form [formGroup]="bankInfoForm">
   <div class="form-group">
     <div class="row">
         <div class="col-xs-4" style="text-align:right;line-height:2em;">
@@ -14,11 +14,14 @@
     <div class="row">
       <div class="col-xs-4" style="text-align:right;line-height:2em;">
           <label>Account Type</label>
-      </div> 
+      </div>
       <div *ngFor="let type of accountType">
           <div class="col-xs-3">
             <label class="radio-inline">
-              <input type="radio" name="account-type" [(ngModel)]="bankInfo.accountType" [value]="type.value">
+              <input type="radio"
+                     name="account-type"
+                     [formControl]="bankInfoForm.controls['accountType']"
+                     [value]="type.value">
               {{type.display}}
           </label>
         </div>
@@ -26,7 +29,7 @@
     </div>
   </div>
   <div class="form-group">
-    <div class="row">
+    <div class="row" [ngClass]="{'has-error':!bankInfoForm.controls['routing_number'].valid && bankInfoForm.controls['routing_number'].dirty}">
       <div class="col-xs-4" style="text-align:right;line-height:2em;">
           <label for="routing_number">Routing Number</label>
       </div>
@@ -35,24 +38,7 @@
                  name="routing_number"
                  class="form-control"
                  id="routing_number"
-                 [(ngModel)]="bankInfo.routingNumber"
-                 #routing_number="ngModel"
-                 minlength="9"
-           
-          required>
-          <div *ngIf="routing_number.errors && (routing_number.dirty || routing_number.touched)"
-               class="alert alert-danger">
-              <div [hidden]="!routing_number.errors.required">
-                  Routing number is required
-              </div>
-              <div [hidden]="!routing_number.errors.minlength">
-                  Routing number must be 9 characters long.
-              </div>
-              <div [hidden]="!routing_number.errors.maxlength">
-                  Routing number must be 9 characters long.
-              </div>
-              {{routing_number.errors | json}}
-          </div>
+                 [formControl]="bankInfoForm.controls['routing_number']">
       </div>
     </div>
   </div>
@@ -62,7 +48,11 @@
          <label for="account-number">Account Number</label>
       </div>
       <div class="col-xs-8">
-          <input type="text" name="accountnumber" class="form-control" id="account-number" [(ngModel)]="bankInfo.accountNumber" #accountnumber="ngModel">
+          <input type="text"
+                 name="accountnumber"
+                 class="form-control"
+                 id="account-number"
+                 [formControl]="bankInfoForm.controls['accountNumber']">
       </div>
     </div>
   </div>
@@ -72,7 +62,11 @@
          <label for="bank-name">Bank Name</label>
       </div>
       <div class="col-xs-8">
-         <input type="text" name="bankname" class="form-control" id="bank-name" [(ngModel)]="bankInfo.bankName" #bankname="ngModel">
+         <input type="text"
+                name="bankname"
+                class="form-control"
+                id="bank-name"
+                [formControl]="bankInfoForm.controls['bankName']">
       </div>
     </div>
   </div>
@@ -82,7 +76,7 @@
         <img width="50%" src="modules/product-management/src/app/banking-widget/media/check_routing_account.png">
     </div>
   </div>
-  
+
   <div class="form-group" style="margin-top: 25px">
     <div class="row">
       <div class="col-xs-4"></div>
@@ -92,23 +86,22 @@
         This authorization will remain in effect until the Company receives notification of termination. I may revoke this authorization by calling {{customerInfo.helpLine}}
         or writing to {{customerInfo.helpAddr}}</label>
       </div>
-    </div> 
+    </div>
   </div>
 
   <div class="row">
       <div class="col-xs-4" style="text-align:right;line-height:2em;">
         <a>Cancel</a>
-      </div>  
+      </div>
       <div class="col-xs-8">
           <a href="javascript:void(0)" class="btn btn-default" style="width:80%;background-color:#ccc;color:white;" (click)="updateBankInfo()">Authorize</a>
-      </div>  
+      </div>
   </div>
- 
+
   <div class="row" style="margin-top:25px">
-      <div class="col-xs-4"></div>  
+      <div class="col-xs-4"></div>
       <div class="col-xs-8">
         <a onclick="window.open('modules/product-management/src/app/banking-widget/media/Premium_Payment_Terms_and_Conditions.pdf'); return false;">Premium Payment Service Term & Conditions</a>
-      </div>  
+      </div>
   </div>
 </form>
-
