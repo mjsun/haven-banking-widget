@@ -54,10 +54,10 @@ export class BankWidgetCusComponent implements OnInit {
         ];
 
         this.bankInfoForm = fb.group({
-            'accountType': [null, Validators.required],
+            'accountType': ['checking', Validators.required],
             'routing_number': [null, Validators.required],
-            'accountNumber': [null],
-            'bankName': [null]
+            'accountNumber': [null, Validators.required],
+            'bankName': [null, Validators.required]
         });
 
     };
