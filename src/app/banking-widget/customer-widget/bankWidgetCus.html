@@ -27,23 +27,25 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="row" [ngClass]="{'has-error':!bankInfoForm.controls['routing_number'].valid && bankInfoForm.controls['routing_number'].dirty}">
-      <div class="col-xs-4" style="text-align:right;line-height:2em;">
-          <label for="routing_number">Routing Number</label>
-      </div>
-      <div class="col-xs-8">
-          <input type="number"
-                 name="routing_number"
-                 class="form-control"
-                 id="routing_number"
-                 [formControl]="bankInfoForm.controls['routing_number']">
+    </div>
+    <div class="form-group" [ngClass]="{'has-error':displayError.routing_number && bankInfoForm.controls['routing_number'].dirty}">
+        <div class="row">
+            <div class="col-xs-4" style="text-align:right;line-height:2em;">
+              <label for="routing_number">Routing Number</label>
+          </div>
+          <div class="col-xs-8">
+              <input type="number"
+                     name="routing_number"
+                     class="form-control"
+                     id="routing_number"
+                     (blur)="validateRoutingLength(bankInfoForm.value['routing_number'])"
+                     [formControl]="bankInfoForm.controls['routing_number']">
+              <p class="alert alert-danger" *ngIf="displayError.routing_number && bankInfoForm.controls['routing_number'].dirty">{{displayError.routing_number}}</p>
+          </div>
       </div>
     </div>
-  </div>
   <div class="form-group">
-    <div class="row" [ngClass]="{'has-error':!bankInfoForm.controls['accountNumber'].valid && bankInfoForm.controls['accountNumber'].dirty}">
+    <div class="row" [ngClass]="{'has-error':displayError.accountNumber && bankInfoForm.controls['accountNumber'].dirty}">
       <div class="col-xs-4" style="text-align:right;line-height:2em;">
          <label for="account-number">Account Number</label>
       </div>
@@ -53,11 +55,12 @@
                  class="form-control"
                  id="account-number"
                  [formControl]="bankInfoForm.controls['accountNumber']">
+          <p class="alert alert-danger" *ngIf="displayError.accountNumber && bankInfoForm.controls['accountNumber'].dirty">{{displayError.accountNumber}}</p>
       </div>
     </div>
   </div>
   <div class="form-group">
-    <div class="row" [ngClass]="{'has-error':!bankInfoForm.controls['bankName'].valid && bankInfoForm.controls['bankName'].dirty}">
+    <div class="row" [ngClass]="{'has-error':displayError.bankName && bankInfoForm.controls['bankName'].dirty}">
       <div class="col-xs-4" style="text-align:right;line-height:2em;">
          <label for="bank-name">Bank Name</label>
       </div>
@@ -67,6 +70,7 @@
                 class="form-control"
                 id="bank-name"
                 [formControl]="bankInfoForm.controls['bankName']">
+          <p class="alert alert-danger" *ngIf="displayError.bankName && bankInfoForm.controls['bankName'].dirty">Please input bank name.</p>
       </div>
     </div>
   </div>
@@ -94,7 +98,11 @@
         <a>Cancel</a>
       </div>
       <div class="col-xs-8">
-          <a href="javascript:void(0)" class="btn btn-default" style="width:80%;background-color:#ccc;color:white;" (click)="updateBankInfo()">Authorize</a>
+          <button type="submit"
+             class="btn btn-primary"
+             style="width:80%;color:white;"
+             (click)="updateBankInfo()"
+             [disabled]="!bankInfoForm.dirty || !validateForm()">Authorize</button>
       </div>
   </div>
 
