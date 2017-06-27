@@ -65,60 +65,104 @@ export class BankWidgetCusComponent implements OnInit {
             'bankName': [, Validators.required]
         });
 
-        this.bankInfoForm.valueChanges.subscribe(data => {
-            // console.log('Form changes', data.accountType);
+        // this.bankInfoForm.valueChanges.subscribe(data => {
+        //     // console.log('Form changes', data.accountType);
+        //
+        //     if(data.accountType === null) {
+        //         this.displayError.accountType = 'Please choose account type';
+        //     }
+        //     else {
+        //         this.displayError.accountType = null;
+        //     }
+        //
+        //     if(data.routing_number === null) {
+        //         this.displayError.routing_number = 'Please input routing number';
+        //     }
+        //     else if(data.routing_number.toString().length !== 9) {
+        //         // this.displayError.routing_number = 'Please input 9 digit routing number';
+        //     }
+        //     else if(!this.checkSum(data.routing_number)) {
+        //         this.displayError.routing_number = 'Please input valid routing number';
+        //     }
+        //     else {
+        //         this.displayError.routing_number = null;
+        //     }
+        //
+        //     if(data.accountNumber === null) {
+        //         this.displayError.accountNumber = 'Please input account number';
+        //     }
+        //     else {
+        //         this.displayError.accountNumber = null;
+        //     }
+        //
+        //
+        //     if(data.bankName == null || data.bankName.replace(/\s/g, '') === '') {
+        //         this.displayError.bankName = 'Please input account number';
+        //     }
+        //     else {
+        //         this.displayError.bankName = null;
+        //     }
+        //
+        // });
 
-            if(data.accountType === null) {
-                this.displayError.accountType = 'Please choose account type';
-            }
-            else {
-                this.displayError.accountType = null;
-            }
+    };
 
-            if(data.routing_number === null) {
-                this.displayError.routing_number = 'Please input routing number';
+
+    validateRoutingNumber() {
+        let routingNumber = this.bankInfoForm.value['routing_number'];
+        if(this.bankInfoForm.controls['routing_number'].dirty) {
+            if(routingNumber === null || routingNumber.toString().length !== 9) {
+                this.displayError.routing_number = 'Please enter 9 digits routing number.';
             }
-            else if(data.routing_number.toString().length !== 9) {
-                // this.displayError.routing_number = 'Please input 9 digit routing number';
-            }
-            else if(!this.checkSum(data.routing_number)) {
+            else if (!this.checkSum(routingNumber)) {
                 this.displayError.routing_number = 'Please input valid routing number';
             }
             else {
                 this.displayError.routing_number = null;
             }
+        }
+    }
 
-            if(data.accountNumber === null) {
-                this.displayError.accountNumber = 'Please input account number';
+    validateAccountNumber() {
+        let accountNumber = this.bankInfoForm.value['accountNumber'];
+        if(this.bankInfoForm.controls['accountNumber'].dirty) {
+            if(accountNumber === null) {
+                this.displayError.accountNumber = 'Please enter account number.'
+            }
+            else if(accountNumber.toString().length > 15) {
+                this.displayError.accountNumber = 'Please enter maximum 15 digits.'
             }
             else {
                 this.displayError.accountNumber = null;
             }
+        }
+    }
 
-
-            if(data.bankName == null || data.bankName.replace(/\s/g, '') === '') {
-                this.displayError.bankName = 'Please input account number';
+    validateBankName() {
+        let bankName = this.bankInfoForm.value['bankName'];
+        if(this.bankInfoForm.controls['bankName'].dirty) {
+            if(bankName !== null && bankName.replace(/\s/g, '') === '') {
+                this.displayError.bankName = 'Please enter account number.'
             }
             else {
                 this.displayError.bankName = null;
             }
-
-        });
-
-    };
-
-    validateRoutingLength(routing_number: number) {
-        if(routing_number && routing_number.toString().length !== 9) {
-            this.displayError.routing_number = 'Please input 9 digit routing number';
         }
     }
 
-    validateForm() {
-        for(let field in this.displayError) {
-            if(this.displayError[field] != null) {
+    enableSubmitButton() {
+        for(let field in this.bankInfoForm.value) {
+            if(this.bankInfoForm.value[field] === null || this.bankInfoForm.value[field] === '') {
                 return false;
             }
         }
+
+        for(let field in this.displayError) {
+            if(this.displayError[field] !== null) {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -148,14 +192,11 @@ export class BankWidgetCusComponent implements OnInit {
     }
 
     updateBankInfo() {
-        if(this.validateForm()) {
-            console.log('Sending info.')
-            this.bankService.postBankInfo(this.policyNumber, this.bankInfo)
-                .subscribe(bankInfo => {
-                    this.router.navigate(['complete']);
-                    return true;
-                });
-        }
+        this.bankService.postBankInfo(this.policyNumber, this.bankInfo)
+            .subscribe(bankInfo => {
+                this.router.navigate(['complete']);
+                return true;
+            });
     }
 }
 

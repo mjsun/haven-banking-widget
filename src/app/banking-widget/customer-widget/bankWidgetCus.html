@@ -38,7 +38,7 @@
                      name="routing_number"
                      class="form-control"
                      id="routing_number"
-                     (blur)="validateRoutingLength(bankInfoForm.value['routing_number'])"
+                     (blur)="validateRoutingNumber()"
                      [formControl]="bankInfoForm.controls['routing_number']">
               <p class="alert alert-danger" *ngIf="displayError.routing_number && bankInfoForm.controls['routing_number'].dirty">{{displayError.routing_number}}</p>
           </div>
@@ -51,9 +51,11 @@
       </div>
       <div class="col-xs-8">
           <input type="number"
-                 name="accountnumber"
+                 maxlength="2"
+                 name="account-number"
                  class="form-control"
                  id="account-number"
+                 (blur)="validateAccountNumber()"
                  [formControl]="bankInfoForm.controls['accountNumber']">
           <p class="alert alert-danger" *ngIf="displayError.accountNumber && bankInfoForm.controls['accountNumber'].dirty">{{displayError.accountNumber}}</p>
       </div>
@@ -69,6 +71,8 @@
                 name="bankname"
                 class="form-control"
                 id="bank-name"
+                maxlength="45"
+                (blur)="validateBankName()"
                 [formControl]="bankInfoForm.controls['bankName']">
           <p class="alert alert-danger" *ngIf="displayError.bankName && bankInfoForm.controls['bankName'].dirty">Please input bank name.</p>
       </div>
@@ -99,11 +103,12 @@
       </div>
       <div class="col-xs-8">
           <button type="submit"
-             class="btn btn-primary"
-             style="width:80%;color:white;"
-             (click)="updateBankInfo()"
-             [disabled]="!bankInfoForm.dirty || !validateForm()">Authorize</button>
+                  class="btn btn-primary"
+                  style="width:80%;color:white;"
+                  [disabled]="!bankInfoForm.dirty || !enableSubmitButton()"
+                  (click)="updateBankInfo()">Authorize</button>
       </div>
+
   </div>
 
   <div class="row" style="margin-top:25px">
