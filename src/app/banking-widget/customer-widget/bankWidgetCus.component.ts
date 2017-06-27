@@ -102,6 +102,9 @@ export class BankWidgetCusComponent implements OnInit {
             if(accountNumber === null || accountNumber.length === 0) {
                 this.displayError.accountNumber = 'Please enter account number.'
             }
+            else if (!this.checkNumber(accountNumber)) {
+                this.displayError.accountNumber = 'Invalid Account Number.';
+            }
             else {
                 this.displayError.accountNumber = null;
             }
