@@ -4,7 +4,7 @@ import { ICustomerInfoAdmin } from '../interface/ICustomerInfoAdmin';
 import { BankService } from '../service/bank.service';
 import { WindowService } from '../../shared/window.service';
 import { Router } from '@angular/router';
-import { NgForm, FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
@@ -59,51 +59,13 @@ export class BankWidgetCusComponent implements OnInit {
         ];
 
         this.bankInfoForm = fb.group({
-            'accountType': [null, Validators.required],
-            'routing_number':  [null, Validators.required],
-            'accountNumber': [null, Validators.required],
-            'bankName': [, Validators.required]
+            'accountType': [null],
+            'routing_number':  [null],
+            'accountNumber': [null],
+            'bankName': [null]
         });
 
-        // this.bankInfoForm.valueChanges.subscribe(data => {
-        //     // console.log('Form changes', data.accountType);
-        //
-        //     if(data.accountType === null) {
-        //         this.displayError.accountType = 'Please choose account type';
-        //     }
-        //     else {
-        //         this.displayError.accountType = null;
-        //     }
-        //
-        //     if(data.routing_number === null) {
-        //         this.displayError.routing_number = 'Please input routing number';
-        //     }
-        //     else if(data.routing_number.toString().length !== 9) {
-        //         // this.displayError.routing_number = 'Please input 9 digit routing number';
-        //     }
-        //     else if(!this.checkSum(data.routing_number)) {
-        //         this.displayError.routing_number = 'Please input valid routing number';
-        //     }
-        //     else {
-        //         this.displayError.routing_number = null;
-        //     }
-        //
-        //     if(data.accountNumber === null) {
-        //         this.displayError.accountNumber = 'Please input account number';
-        //     }
-        //     else {
-        //         this.displayError.accountNumber = null;
-        //     }
-        //
-        //
-        //     if(data.bankName == null || data.bankName.replace(/\s/g, '') === '') {
-        //         this.displayError.bankName = 'Please input account number';
-        //     }
-        //     else {
-        //         this.displayError.bankName = null;
-        //     }
-        //
-        // });
+        // this.bankInfoForm.valueChanges.subscribe(data => { });
 
     };
 
