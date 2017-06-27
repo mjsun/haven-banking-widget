@@ -100,7 +100,10 @@ export class BankWidgetAdminComponent implements OnInit {
         let accountNumber = this.bankInfoForm.value['accountNumber'];
         if(this.bankInfoForm.controls['accountNumber'].dirty) {
             if(accountNumber === null || accountNumber.length === 0) {
-                this.displayError.accountNumber = 'Please enter account number.'
+                this.displayError.accountNumber = 'Please enter Account Number.'
+            }
+            else if (!this.checkNumber(accountNumber)) {
+                this.displayError.accountNumber = 'Invalid Account Number.';
             }
             else {
                 this.displayError.accountNumber = null;
@@ -112,7 +115,7 @@ export class BankWidgetAdminComponent implements OnInit {
         let bankName = this.bankInfoForm.value['bankName'];
         if(this.bankInfoForm.controls['bankName'].dirty) {
             if(bankName === null || bankName.length === 0) {
-                this.displayError.bankName = 'Please enter account number.'
+                this.displayError.bankName = 'Please enter Bank Name.'
             }
             else {
                 this.displayError.bankName = null;
