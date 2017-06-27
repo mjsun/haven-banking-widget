@@ -107,15 +107,26 @@ export class BankWidgetCusComponent implements OnInit {
 
     };
 
+    checkNumber(str: string) {
+        if(str !== null && str.length > 0) {
+            for(let i of str) {
+                if (i.match(/\D/)) {
+                    console.log(i);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     validateRoutingNumber() {
         let routingNumber = this.bankInfoForm.value['routing_number'];
         if(this.bankInfoForm.controls['routing_number'].dirty) {
-            if(routingNumber === null || routingNumber.toString().length !== 9) {
-                this.displayError.routing_number = 'Please enter 9 digits routing number.';
+            if (routingNumber === null || routingNumber.length !== 9) {
+                this.displayError.routing_number = 'Please enter 9 digit Routing Number.';
             }
-            else if (!this.checkSum(routingNumber)) {
-                this.displayError.routing_number = 'Please input valid routing number';
+            else if (!this.checkNumber(routingNumber) || !this.checkSum(routingNumber)) {
+                this.displayError.routing_number = 'Invalid Routing Number.';
             }
             else {
                 this.displayError.routing_number = null;
@@ -126,11 +137,8 @@ export class BankWidgetCusComponent implements OnInit {
     validateAccountNumber() {
         let accountNumber = this.bankInfoForm.value['accountNumber'];
         if(this.bankInfoForm.controls['accountNumber'].dirty) {
-            if(accountNumber === null) {
+            if(accountNumber === null || accountNumber.length === 0) {
                 this.displayError.accountNumber = 'Please enter account number.'
-            }
-            else if(accountNumber.toString().length > 15) {
-                this.displayError.accountNumber = 'Please enter maximum 15 digits.'
             }
             else {
                 this.displayError.accountNumber = null;
@@ -141,7 +149,7 @@ export class BankWidgetCusComponent implements OnInit {
     validateBankName() {
         let bankName = this.bankInfoForm.value['bankName'];
         if(this.bankInfoForm.controls['bankName'].dirty) {
-            if(bankName !== null && bankName.replace(/\s/g, '') === '') {
+            if(bankName === null || bankName.length === 0) {
                 this.displayError.bankName = 'Please enter account number.'
             }
             else {

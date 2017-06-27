@@ -34,10 +34,11 @@
               <label for="routing_number">Routing Number</label>
           </div>
           <div class="col-xs-8">
-              <input type="number"
+              <input type="text"
                      name="routing_number"
                      class="form-control"
                      id="routing_number"
+                     maxlength="9"
                      (blur)="validateRoutingNumber()"
                      [formControl]="bankInfoForm.controls['routing_number']">
               <p class="alert alert-danger" *ngIf="displayError.routing_number && bankInfoForm.controls['routing_number'].dirty">{{displayError.routing_number}}</p>
@@ -50,8 +51,8 @@
          <label for="account-number">Account Number</label>
       </div>
       <div class="col-xs-8">
-          <input type="number"
-                 maxlength="2"
+          <input type="text"
+                 maxlength="15"
                  name="account-number"
                  class="form-control"
                  id="account-number"
