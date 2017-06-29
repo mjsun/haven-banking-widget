@@ -10,7 +10,7 @@
                 <label>Account Holder</label>
             </div>
             <div class="col-xs-8" style="padding-left: 0px">
-                <span class="col-xs-7">{{bankInfo.accountholder || customerInfo.lastName + ' ' + customerInfo.firstName}}</span>
+                <span class="col-xs-7">{{customerInfo.accountHolder}}</span>
             </div>
         </div>
     </div>
@@ -108,7 +108,7 @@
           <label>Script</label>
       </div>
       <div class="col-xs-8">
-          <span>{{customerInfo.firstName}} {{customerInfo.lastName}}, today, {{customerInfo.currentDate | date}} you authorize MassMutual
+          <span>{{customerInfo.accountHolder}}, today, {{customerInfo.currentDate | date}} you authorize MassMutual
             to withdraw {{customerInfo.premiumAmt| currency}} monthly from your {{customerInfo.bankName}} {{bankInfo.accountType}} account
             to pay your premium. The first draft will occur on {{customerInfo.effectiveDate | date}}
             and {{customerInfo.effectiveDay}} thereafter.
@@ -137,7 +137,7 @@
 
   <div class="row">
       <div class="col-xs-4" style="text-align:left;line-height:2em;">
-        <a>Cancel</a>
+        <a href="javascript:void(0)">Cancel</a>
       </div>  
       <div class="col-xs-8">
           <button type="submit"

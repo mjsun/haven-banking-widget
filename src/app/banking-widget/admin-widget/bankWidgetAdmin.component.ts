@@ -27,7 +27,7 @@ export class BankWidgetAdminComponent implements OnInit {
         bankName: null
     };
     constructor(private  bankService: BankService, private windowService: WindowService, private router: Router, private fb: FormBuilder) {
-        let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller || {customer : {applicationPolicy: {policyNumber: '1'}}};
+        let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller || {customer : {applicationPolicy: {policyNumber: '110000001'}}};
         this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
 
         this.customerInfo = {
@@ -169,8 +169,13 @@ export class BankWidgetAdminComponent implements OnInit {
     }
 
     updateBankInfo() {
-         this.bankService.postBankInfo(this.policyNumber, this.bankInfo)
-            .subscribe(bankInfo =>  this.router.navigate(['complete']));
+        for(let key in this.bankInfo) {
+            this.bankInfo[key] = this.bankInfoForm.value[key];
+        }
+        this.bankService.postBankInfo(this.policyNumber, this.bankInfo)
+            .subscribe(bankInfo => {
+                this.router.navigate(['complete']);
+            });
     }
 }
 

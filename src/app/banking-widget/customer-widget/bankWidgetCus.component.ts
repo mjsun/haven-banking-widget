@@ -32,8 +32,7 @@ export class BankWidgetCusComponent implements OnInit {
         this.policyNumber ='110000001' || parentController.customer.applicationPolicy.policyNumber;
 
         this.customerInfo = {
-            firstName: '',
-            lastName: '',
+            accountHolder: '',
             isPaymentOverDue: false,
             currentDate: new Date(),
             premiumAmt: 0.00,
@@ -165,10 +164,12 @@ export class BankWidgetCusComponent implements OnInit {
     }
 
     updateBankInfo() {
+        for(let key in this.bankInfo) {
+            this.bankInfo[key] = this.bankInfoForm.value[key];
+        }
         this.bankService.postBankInfo(this.policyNumber, this.bankInfo)
             .subscribe(bankInfo => {
                 this.router.navigate(['complete']);
-                return true;
             });
     }
 }

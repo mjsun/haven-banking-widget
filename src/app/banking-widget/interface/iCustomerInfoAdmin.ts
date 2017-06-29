@@ -1,6 +1,5 @@
 export interface ICustomerInfoAdmin {
-    firstName: string,
-    lastName: string,
+    accountHolder: string,
     isPaymentOverDue: boolean,
     currentDate: Date,
     premiumAmt: number,
