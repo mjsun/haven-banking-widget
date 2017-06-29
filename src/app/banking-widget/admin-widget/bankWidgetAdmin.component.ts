@@ -31,8 +31,7 @@ export class BankWidgetAdminComponent implements OnInit {
         this.policyNumber = parentController.customer.applicationPolicy.policyNumber;
 
         this.customerInfo = {
-            firstName: '',
-            lastName: '',
+            accountHolder: '',
             isPaymentOverDue: false,
             currentDate: new Date(),
             premiumAmt: 0.00,
