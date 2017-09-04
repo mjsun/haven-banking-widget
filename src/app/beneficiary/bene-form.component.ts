@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
     templateUrl: './bene-form.component.html'
 })
 export class BeneFormComponent {
-      @Input() name: string;
+     name: string = 'test';
 }

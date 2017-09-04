@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 /* Feature Modules */
 import { AppComponent } from './app.component';
@@ -13,7 +13,10 @@ import { BeneIndividualComponent } from './bene-individual.component';
 const appRoutes: Routes = [
   {path: '', redirectTo: '/list', pathMatch: 'full'},
   {path: 'form', component: BeneFormComponent},
-  {path: 'list', component: BeneListComponent},
+  {
+    path: 'list',
+    component: BeneListComponent
+  },
 ];
 
 @NgModule({
@@ -21,7 +24,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: true})
+    RouterModule.forRoot(appRoutes)
   ],
   declarations: [
     AppComponent,

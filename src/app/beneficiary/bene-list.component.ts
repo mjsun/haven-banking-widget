@@ -17,10 +17,6 @@ export class BeneListComponent {
         this.currentBene = {};
     }
 
-    statusChange(event: any) {
-        this.currentBene = event;
-    }
-
     delete(bene: any) {
         let beneIndex = this.beneList.indexOf(bene);
         this.beneList.splice(beneIndex, 1);
