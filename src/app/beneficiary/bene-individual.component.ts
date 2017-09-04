@@ -12,8 +12,15 @@ export class BeneIndividualComponent {
     @Output()
     isDelBene: EventEmitter<any> = new EventEmitter<any>();
 
+    @Output()
+    percent: EventEmitter<number> = new EventEmitter<number>();
+
     deleteBeneficiary() {
         this.isDelBene.emit(this.bene);
+    }
+
+    updatePercent() {
+        this.percent.emit(this.bene);
     }
 
 }

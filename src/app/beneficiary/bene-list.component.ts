@@ -21,4 +21,8 @@ export class BeneListComponent {
         let beneIndex = this.beneList.indexOf(bene);
         this.beneList.splice(beneIndex, 1);
     }
+
+    updatePercent(bene: any) {
+        this.currentBene = bene;
+    }
 }
