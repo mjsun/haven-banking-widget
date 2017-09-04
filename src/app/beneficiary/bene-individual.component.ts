@@ -13,6 +13,10 @@ export class BeneIndividualComponent {
     status: EventEmitter<any> = new EventEmitter<any>();
 
     getStatus() {
+        // this.status.emit(this.bene);
+    }
+
+    deleteBeneficiary() {
         this.status.emit(this.bene);
     }
 

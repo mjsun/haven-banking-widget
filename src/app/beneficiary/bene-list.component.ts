@@ -21,4 +21,9 @@ export class BeneListComponent {
         // console.log(event);
         this.currentBene = event;
     }
+
+    delete(bene: any) {
+        let beneIndex = this.beneList.indexOf(bene);
+        this.beneList.splice(beneIndex, 1);
+    }
 }

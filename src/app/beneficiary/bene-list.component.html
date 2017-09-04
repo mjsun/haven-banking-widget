@@ -1,9 +1,9 @@
 <h2>Policy beneficiaries</h2>
 <label>Primary</label>
 <hr>
-{{currentBene.name}}
+{{currentBene.name}} status is {{currentBene.percent}}
 <div *ngFor="let bene of beneList">
-    <bene-individual [bene]="bene" (status)="statusChange($event)"></bene-individual>
+    <bene-individual [bene]="bene" (status)="delete($event)"></bene-individual>
 </div>
 <hr>
 <a routerLink="/form" routerLinkActive="active">Add new beneficiary</a>
