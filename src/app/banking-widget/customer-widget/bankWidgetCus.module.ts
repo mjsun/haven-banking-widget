@@ -11,9 +11,9 @@ import { CompleteCusComponent } from './complete.component';
 import { AppComponent } from './bankApp.component';
 
 const appRoutes: Routes = [
-    {path:'', component: BankWidgetCusComponent},
-    {path:'complete', component: CompleteCusComponent}
-]
+    {path: '', component: BankWidgetCusComponent},
+    {path: 'complete', component: CompleteCusComponent}
+];
 
 @NgModule({
   imports: [

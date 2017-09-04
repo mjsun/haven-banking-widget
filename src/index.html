@@ -19,15 +19,17 @@
     <!-- Configure SystemJS -->
     <script src="systemjs.config.inapp.js"></script>
     <script>
-         System.import('main.bank.customer.js').catch(function(err){ console.error(err); });
+//         System.import('main.bank.customer.js').catch(function(err){ console.error(err); });
 //        System.import('main.bank.admin.js').catch(function(err){ console.error(err); });
+        System.import('main.bene.js').catch(function(err){ console.error(err); });
     </script>
 </head>
 
 <body>
     <div class="container">
-        <bank-widget-customer></bank-widget-customer>
+        <!--<bank-widget-customer></bank-widget-customer>-->
         <!--<bank-widget-admin>Loading</bank-widget-admin>-->
+        <bene-widget></bene-widget>
     </div>
 </body>
 
