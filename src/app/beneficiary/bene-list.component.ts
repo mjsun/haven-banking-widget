@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class BeneListComponent {
     beneList: any [];
     currentBene: any;
-    constructor() {
+    constructor(private route: ActivatedRoute) {
         this.beneList = [
                 {name: 'Jack Young'},
                 {name: 'Baek Mak'},
@@ -25,4 +26,5 @@ export class BeneListComponent {
     updatePercent(bene: any) {
         this.currentBene = bene;
     }
+
 }

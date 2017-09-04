@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
     templateUrl: './bene-form.component.html'
 })
 export class BeneFormComponent {
-     name: string = 'test';
+     bene: any;
+
+     constructor() {
+         this.bene = {
+             name: 'test',
+             percent: 50
+         };
+     }
 }
