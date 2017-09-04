@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'bene-widget',
+    selector: 'bene-form',
     templateUrl: './bene-form.component.html'
 })
 export class BeneFormComponent {
-      @Input()name: string;  
+      @Input()name: string;
 }
