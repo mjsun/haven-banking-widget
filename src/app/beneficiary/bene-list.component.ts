@@ -18,7 +18,6 @@ export class BeneListComponent {
     }
 
     statusChange(event: any) {
-        // console.log(event);
         this.currentBene = event;
     }
 
