@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input , Output, EventEmitter} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -6,5 +6,14 @@ import { Component, Input } from '@angular/core';
     templateUrl: './bene-individual.component.html'
 })
 export class BeneIndividualComponent {
-    @Input() bene: any;
+    @Input()
+    bene: any;
+
+    @Output()
+    status: EventEmitter<any> = new EventEmitter<any>();
+
+    getStatus() {
+        this.status.emit(this.bene);
+    }
+
 }
