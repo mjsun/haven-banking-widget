@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BeneFormComponent } from './bene-form.component';
 import { BeneListComponent } from './bene-list.component';
+import { BeneIndividualComponent } from './bene-individual.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/list', pathMatch: 'full'},
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     BeneFormComponent,
-    BeneListComponent
+    BeneListComponent,
+    BeneIndividualComponent
   ],
   bootstrap: [ AppComponent ]
 })

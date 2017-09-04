@@ -5,4 +5,13 @@ import { Component } from '@angular/core';
     selector: 'bene-list',
     templateUrl: './bene-list.component.html'
 })
-export class BeneListComponent {}
+export class BeneListComponent {
+    beneList: any [];
+    constructor() {
+        this.beneList = [
+                {name: 'Jack Young'},
+                {name: 'Baek Mak'},
+                {name: 'Liy Alle'}
+            ];
+    }
+}

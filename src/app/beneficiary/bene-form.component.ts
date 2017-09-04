@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
     templateUrl: './bene-form.component.html'
 })
 export class BeneFormComponent {
-      @Input()name: string;
+      @Input() name: string;
 }

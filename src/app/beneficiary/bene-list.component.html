@@ -1,8 +1,9 @@
-<h2>Edit Beneficiaries</h2>
-<span>Primary Beneficiaries</span>
+<h2>Policy beneficiaries</h2>
+<label>Primary</label>
 <hr>
-<div>
-    <label>Erin Disseldorf</label>
-    <input type="text">
+
+<div *ngFor="let bene of beneList">
+    <bene-individual [bene]="bene"></bene-individual>
 </div>
+<hr>
 <a routerLink="/form" routerLinkActive="active">Add new beneficiary</a>
