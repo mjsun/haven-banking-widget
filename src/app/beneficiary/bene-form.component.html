@@ -2,10 +2,43 @@
 <hr>
 <div>
     <label>Relationship to you</label>
-    <select>
-        <option>op1</option>
-        <option>op2</option>
-        <option>op3</option>
+    <select [(ngModel)]="bene.relationship" (change)="getSelectedRelationOption()">
+        <option *ngFor="let r of primaryRelationshipList" [ngValue]="r.code">{{r.description}}</option>
     </select>
+    <div *ngIf="otherRelationshipList" >
+        <select [(ngModel)]="bene.otherRelationship">
+            <option *ngFor="let o of otherRelationshipList" [ngValue]="o">{{o.description}}</option>
+        </select>
+    </div>
+    <hr>
+    <label>Name</label>
+    <input type="text" [(ngModel)]="bene.name"/>
+    <hr>
+    <label>Address</label>
+    <input type="text" [(ngModel)]="bene.address.line1"/>
+    <input type="text" [(ngModel)]="bene.address.line2"/>
+    <input type="text" [(ngModel)]="bene.address.city"/>
+    <input type="text" [(ngModel)]="bene.address.state"/>
+    <input type="text" [(ngModel)]="bene.address.zipCode"/>
+    <hr>
+    <label>Phone number</label>
+    <input type="text" [(ngModel)]="bene.phoneNumber" />
+    <hr>
+    <label>Date of birth</label>
+    <input type="text"  [(ngModel)]="bene.dateOfBirth"/>
+    <hr>
+    <label>Social Security number</label>
+    <input type="text" [(ngModel)]="bene.ssn" />
+    <hr>
+    <label>Per stirpes</label>
+    <h5>In the case of the beneficiary's death, would you like to distribute benefits equally amonst their decendants?</h5>
+    <input type="radio" value="yes" name="perStirpes" [(ngModel)]="bene.perStirpes"  />Yes
+    <input type="radio" value="no" name="perStirpes" [(ngModel)]="bene.perStirpes"  />No
+    <br />
+    <label>BENEFIT ALLOCATION</label>
+    <hr>
+    <label>Allocate 100% of benefit to beneficiarity</label>
+    <input type="radio" value="yes" name="isFullPercent" [(ngModel)]="isFullPercent" (click)="setCurrentBeneFullPercent()" />Yes
+    <input type="radio" value="no" name="isFullPercent" [(ngModel)]="isFullPercent" />No
 </div>
-<a routerLink="/list" routerLinkActive="active">Add</a>
+<a (click)="addBeneToList()">Add</a>

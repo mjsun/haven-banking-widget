@@ -19,6 +19,10 @@ export class BeneIndividualComponent {
         this.isDelBene.emit(this.bene);
     }
 
+    setBene() {
+        this.percent.emit(this.bene);
+    }
+
     updatePercent() {
         this.percent.emit(this.bene);
     }

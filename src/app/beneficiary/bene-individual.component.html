@@ -1,6 +1,6 @@
 <div>
     <label>{{bene.name}}</label>
-    <input type="text" [(ngModel)]="bene.percent" (focus)="updatePercent()">
+    <input type="text" [(ngModel)]="bene.percent" (focus)="setBene()" (keyup)="updatePercent()">
     <span>or</span>
     <a (click)="deleteBeneficiary()">delete beneficiary</a>
 </div>

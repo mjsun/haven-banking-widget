@@ -6,4 +6,8 @@
     <bene-individual [bene]="bene" (isDelBene)="delete($event)" (percent)="updatePercent($event)" ></bene-individual>
 </div>
 <hr>
+<div>
+    <label>Total</label>
+    <label>{{totalPercent}}</label>
+</div>
 <a routerLink="/form" routerLinkActive="active">Add new beneficiary</a>

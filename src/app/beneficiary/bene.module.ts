@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { BeneFormComponent } from './bene-form.component';
 import { BeneListComponent } from './bene-list.component';
 import { BeneIndividualComponent } from './bene-individual.component';
+import { iAddress } from './interfaces/address.interface';
+import { iBene } from './interfaces/bene.interface';
+import { BeneListService } from './services/beneList.service';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/list', pathMatch: 'full'},
@@ -20,18 +23,19 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    HttpModule,
-    FormsModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  declarations: [
-    AppComponent,
-    BeneFormComponent,
-    BeneListComponent,
-    BeneIndividualComponent
-  ],
-  bootstrap: [ AppComponent ]
+    imports: [
+        BrowserModule,
+        HttpModule,
+        FormsModule,
+        RouterModule.forRoot(appRoutes)
+    ],
+    declarations: [
+        AppComponent,
+        BeneFormComponent,
+        BeneListComponent,
+        BeneIndividualComponent
+    ],
+    providers: [BeneListService],
+    bootstrap: [ AppComponent ]
 })
 export class BeneModule { }
