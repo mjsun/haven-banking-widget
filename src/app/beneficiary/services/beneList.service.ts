@@ -81,7 +81,7 @@ export class BeneListService {
     }
 
     deleteFromBeneList(Bene: iBene, type: string) {
-        if(type === 'Priamry'){
+        if(type === 'Primary'){
             let beneIndex: number = BeneListService.primaryBeneList.indexOf(Bene);
             BeneListService.primaryBeneList.splice(beneIndex, 1);
         }

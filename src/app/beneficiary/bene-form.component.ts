@@ -49,7 +49,8 @@ export class BeneFormComponent {
                 date: '',
                 ssn: '',
                 perStirpes: true,
-                percent: 40
+                percent: 40,
+                type: this.type
             };
        // }
        this.person = false;

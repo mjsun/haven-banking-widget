@@ -3,7 +3,7 @@
 <hr>
 {{currentBene | json}}
 <div *ngFor="let bene of primaryBeneList">
-    <bene-individual [bene]="bene" (isDelBene)="delete($event)" (percent)="updatePercent($event)" ></bene-individual>
+    <bene-individual [bene]="bene" (isDelBene)="delete($event, 'Primary')" (percent)="updatePercent($event)" ></bene-individual>
 </div>
 <hr>
 <div>
@@ -14,7 +14,7 @@
 <br><br>
 <label>Contingent</label>
 <div *ngFor="let bene of contingentBeneList">
-    <bene-individual [bene]="bene" (isDelBene)="delete($event)" (percent)="updatePercent($event)" ></bene-individual>
+    <bene-individual [bene]="bene" (isDelBene)="delete($event, 'Contingent')" (percent)="updatePercent($event)" ></bene-individual>
 </div>
 <hr>
 <div>
