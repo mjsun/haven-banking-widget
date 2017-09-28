@@ -112,7 +112,8 @@ export class BeneFormComponent {
             date: this.beneForm.get('birthday').value ? this.beneForm.get('birthday').value : this.beneForm.get('trustDate').value,
             ssn: this.beneForm.get('ssn').value,
             perStirpes: this.beneForm.get('perStirpe').value == "perstirpeYes" ? true : false,
-            percent: 0
+            percent: 0,
+            type: this.type
         };
         this.setPercentageFull();
         this.beneListService.addBeneList(this.bene, this.type);

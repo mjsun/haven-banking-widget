@@ -23,15 +23,16 @@ export class BeneListComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private beneListService: BeneListService, private allocatorService: AllocatorService, private router: Router) {
         this.primaryBeneList = this.primaryBeneList || this.beneListService.getPrimaryBeneList();
-        this.primaryBeneList = this.contingentBeneList || this.beneListService.getContingentBeneList();
+        this.contingentBeneList = this.contingentBeneList || this.beneListService.getContingentBeneList();
+        this.oldPrimaryBeneList = JSON.parse(JSON.stringify(this.primaryBeneList));
+       // console.log(this.oldPrimaryBeneList);
+        this.oldContingentBeneList = JSON.parse(JSON.stringify(this.contingentBeneList));
         this.updatePercent();
     }
 
     ngOnInit() {
         this.primaryBeneList = this.beneListService.getPrimaryBeneList();
         this.contingentBeneList = this.beneListService.getContingentBeneList();
-        this.oldPrimaryBeneList = this.primaryBeneList;
-        this.oldContingentBeneList = this.contingentBeneList;
 
     }
 
@@ -46,10 +47,11 @@ export class BeneListComponent implements OnInit {
     }
 
     cancelChanges(){
-        console.log("Cancel changes");
+     //   console.log(this.oldPrimaryBeneList);
         this.primaryBeneList = this.oldPrimaryBeneList;
         this.contingentBeneList = this.oldContingentBeneList;
-        this.router.navigate(['/list']);
+        this.totalPercentPrimary = this.allocatorService.getSubTotalPrimary();
+        this.totalPercentContingent = this.allocatorService.getSubTotalContingent();
     }
 
 }

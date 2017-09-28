@@ -10,5 +10,6 @@ export interface iBene {
     date?: string,
     ssn?: string,
     perStirpes?: boolean,
-    percent?: number
+    percent?: number,
+    type: string
 }
