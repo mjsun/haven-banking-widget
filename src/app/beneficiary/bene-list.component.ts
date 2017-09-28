@@ -51,7 +51,9 @@ export class BeneListComponent implements OnInit {
     cancelChanges(){
      //   console.log(this.oldPrimaryBeneList);
         this.primaryBeneList = this.oldPrimaryBeneList;
+        this.beneListService.setPrimaryBeneList(this.primaryBeneList);
         this.contingentBeneList = this.oldContingentBeneList;
+        this.beneListService.setContingentBeneList(this.contingentBeneList);
         this.totalPercentPrimary = this.allocatorService.getSubTotalPrimary();
         this.totalPercentContingent = this.allocatorService.getSubTotalContingent();
     }

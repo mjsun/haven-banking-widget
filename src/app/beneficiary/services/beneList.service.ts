@@ -63,6 +63,14 @@ export class BeneListService {
         return BeneListService.contingentBeneList;
     }
 
+    setPrimaryBeneList(primaryList: Array<iBene>) {
+        BeneListService.primaryBeneList = primaryList;
+    }
+
+    setContingentBeneList(contingentList: Array<iBene>) {
+        BeneListService.contingentBeneList = contingentList;
+    }
+
     setCurrentBene(bene: iBene){
         BeneListService.currentBene = bene;
     }
