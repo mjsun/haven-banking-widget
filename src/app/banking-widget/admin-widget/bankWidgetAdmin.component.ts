@@ -47,7 +47,6 @@ export class BankWidgetAdminComponent implements OnInit {
             accountType: 'checking',
             routingNumber: '',
             accountNumber: '',
-            bankName: '',
             notes: ''
         };
 

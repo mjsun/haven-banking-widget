@@ -16,10 +16,7 @@ export class BankWidgetCusComponent implements OnInit {
     public bankInfo: iBankingInfo ;
     public customerInfo: ICustomerInfoAdmin;
     public policyNumber: string;
-    public accountType: any[] = [
-        {value: 'checking', display: 'Checking'},
-        {value: 'saving', display: 'Saving'}
-    ];
+    public accountTypeList: string[] = ['Checking','Savings','Business Checking','Business Savings'];
     public bankInfoForm: FormGroup;
     public displayError: any = {
         accountType: null,
@@ -27,6 +24,8 @@ export class BankWidgetCusComponent implements OnInit {
         accountNumber: null,
         bankName: null
     };
+
+
     constructor(private  bankService: BankService, private windowService: WindowService, private router: Router, private fb: FormBuilder) {
         let parentController = windowService.nativeWindow.controller || windowService.nativeWindow.parent.controller || {customer : {applicationPolicy: {policyNumber: '1'}}};
         this.policyNumber ='110000001' || parentController.customer.applicationPolicy.policyNumber;
@@ -48,25 +47,23 @@ export class BankWidgetCusComponent implements OnInit {
             accountType: 'checking',
             routingNumber: '',
             accountNumber: '',
-            bankName: '',
             notes: ''
         };
 
-        this.accountType = [
-            {value: 'checking', display: 'Checking'},
-            {value: 'saving', display: 'Saving'}
-        ];
-
-        this.bankInfoForm = fb.group({
-            'accountType': [null],
-            'routing_number':  [null],
-            'accountNumber': [null],
-            'bankName': [null]
-        });
-
         // this.bankInfoForm.valueChanges.subscribe(data => { });
+        this.createForm();
 
     };
+
+    createForm(){
+        this.bankInfoForm = this.fb.group({
+            accountholder: [''],
+            accountType: [''],
+            routingNumber: [''],
+            accountNumber: [''],
+            notes: ['']            
+        });
+    }
 
     checkNumber(str: string) {
         if(str !== null && str.length > 0) {
