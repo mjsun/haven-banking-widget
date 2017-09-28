@@ -22,19 +22,21 @@ export class BeneListComponent implements OnInit {
     totalPercentContingent: number;
 
     constructor(private route: ActivatedRoute, private beneListService: BeneListService, private allocatorService: AllocatorService, private router: Router) {
-        this.primaryBeneList = this.primaryBeneList || this.beneListService.getBeneList();
+        this.primaryBeneList = this.primaryBeneList || this.beneListService.getPrimaryBeneList();
+        this.primaryBeneList = this.contingentBeneList || this.beneListService.getContingentBeneList();
         this.updatePercent();
     }
 
     ngOnInit() {
-        this.primaryBeneList = this.beneListService.getBeneList();
+        this.primaryBeneList = this.beneListService.getPrimaryBeneList();
+        this.contingentBeneList = this.beneListService.getContingentBeneList();
         this.oldPrimaryBeneList = this.primaryBeneList;
         this.oldContingentBeneList = this.contingentBeneList;
 
     }
 
-    delete(bene: any) {
-        this.beneListService.deleteFromBeneList(bene);
+    delete(bene: any, type: string) {
+        this.beneListService.deleteFromBeneList(bene, type);
     }
 
     updatePercent(bene?: iBene) {

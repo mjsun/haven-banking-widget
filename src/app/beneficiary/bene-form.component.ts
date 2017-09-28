@@ -2,7 +2,7 @@
 import { iBene } from './interfaces/bene.interface';
 import { BeneListService } from './services/beneList.service';
 import { BeneRelationService } from './services/beneRelation.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { Component, Input, OnChanges } from '@angular/core';
@@ -27,8 +27,9 @@ export class BeneFormComponent {
     otherTrust: boolean;
     specificChildren: boolean;
     relationship: string;
+    type: string;
 
-    constructor(private beneListService: BeneListService, private router: Router, private beneRelationService: BeneRelationService, private fb: FormBuilder) {
+    constructor(private beneListService: BeneListService, private router: Router, private activatedRouter: ActivatedRoute , private beneRelationService: BeneRelationService, private fb: FormBuilder) {
        // if (this.beneListService.getCurrentBene) {
        //     this.bene  = this.beneListService.getCurrentBene();
        // }
@@ -114,7 +115,7 @@ export class BeneFormComponent {
             percent: 0
         };
         this.setPercentageFull();
-        this.beneListService.addBeneList(this.bene);
+        this.beneListService.addBeneList(this.bene, this.type);
         this.router.navigate(['/list']);
     }
 
@@ -175,4 +176,10 @@ export class BeneFormComponent {
     setCurrentBeneFullPercent() {
         this.bene.percent = 100;
     }
+
+    ngOnInit() {
+        this.type = this.activatedRouter.snapshot.data['type'];
+        console.log("Data via params: ",this.activatedRouter.snapshot.data['type']);
+        console.log("Data via params: ",this.activatedRouter.snapshot.data);
+      }
 }

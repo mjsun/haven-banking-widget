@@ -3,11 +3,12 @@ import {iBene} from '../interfaces/bene.interface';
 
 @Injectable()
 export class BeneListService {
-    private static beneList: Array<iBene> = [];
+    private static primaryBeneList: Array<iBene> = [];
+    private static contingentBeneList: Array<iBene> = [];
     private static currentBene: iBene;
 
     constructor() {
-        BeneListService.beneList = BeneListService.beneList /*|| [{
+        BeneListService.primaryBeneList = BeneListService.primaryBeneList; /*|| [{
             relationship: 'spouse',
             name: 'bene1',
             address: {
@@ -54,8 +55,12 @@ export class BeneListService {
         }];  */
     } 
 
-    getBeneList() {
-        return BeneListService.beneList;
+    getPrimaryBeneList() {
+        return BeneListService.primaryBeneList;
+    }
+
+    getContingentBeneList() {
+        return BeneListService.contingentBeneList;
     }
 
     setCurrentBene(bene: iBene){
@@ -66,12 +71,23 @@ export class BeneListService {
         return BeneListService.currentBene as iBene;
     }
 
-    addBeneList(bene: iBene) {
-        BeneListService.beneList.push(bene);
+    addBeneList(bene: iBene, type: string) {
+        if(type === 'Primary'){
+            BeneListService.primaryBeneList.push(bene);
+        }
+        else {
+            BeneListService.contingentBeneList.push(bene);
+        }
     }
 
-    deleteFromBeneList(Bene: iBene) {
-        let beneIndex: number = BeneListService.beneList.indexOf(Bene);
-        BeneListService.beneList.splice(beneIndex, 1);
+    deleteFromBeneList(Bene: iBene, type: string) {
+        if(type === 'Priamry'){
+            let beneIndex: number = BeneListService.primaryBeneList.indexOf(Bene);
+            BeneListService.primaryBeneList.splice(beneIndex, 1);
+        }
+        else {
+            let beneIndex: number = BeneListService.contingentBeneList.indexOf(Bene);
+            BeneListService.contingentBeneList.splice(beneIndex, 1);
+        }
     }
 }

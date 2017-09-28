@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
 
@@ -18,7 +18,8 @@ import { ValidationService } from './validation.service';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/list', pathMatch: 'full'},
-  {path: 'form', component: BeneFormComponent},
+  {path: 'pForm/:id', component: BeneFormComponent, data: {type: 'Primary'}},
+  {path: 'cForm/:id', component: BeneFormComponent, data: {type: 'Contingent'}},
   {
     path: 'list',
     component: BeneListComponent

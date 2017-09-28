@@ -1,4 +1,4 @@
-<h2>Primary Beneficiary</h2>
+<h2>{{type}} Beneficiary</h2>
 <form [formGroup]="beneForm">
 
   <div class="form-group">
@@ -165,4 +165,4 @@
   </div>
 
 
-<button type="submit" *ngIf="other || person || children || otherTrust" (click)="addBeneToList();">Submit</button>  
+<button type="submit" *ngIf="other || person || children || otherTrust" (click)="addBeneToList(type);">Submit</button>  
