@@ -2,88 +2,66 @@
 <form [formGroup]="bankInfoForm">
   <div class="form-group">
     <div class="row">
-        <div class="col-xs-4" style="text-align:right;line-height:2em;">
-            <label>Account Holder</label>
-        </div>
-        <div class="col-xs-8" style="padding-left: 0px">
-             <span class="col-xs-7">{{customerInfo.accountHolder}}</span>
-        </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="row">
       <div class="col-xs-4" style="text-align:right;line-height:2em;">
-          <label>Account Type</label>
+        <label>Account Holder</label>
       </div>
-      <div *ngFor="let type of accountType">
-          <div class="col-xs-3">
-            <label class="radio-inline">
+      <div class="col-xs-8" style="padding-left: 0px">
+        <span class="col-xs-7">{{customerInfo.accountHolder}}</span>
+      </div>
+   <!--   <div class="form-group">
+        <div class="row">
+          <div class="col-xs-4" style="text-align:right;line-height:2em;">
+            <label>Account Type</label>
+          </div>
+          <div *ngFor="let type of accountType">
+            <div class="col-xs-3">
+              <label class="radio-inline">
               <input type="radio"
-                     name="account-type"
-                     [formControl]="bankInfoForm.controls['accountType']"
-                     [value]="type.value">
+                     [value]="type.value"
+                     formControlName="accountType">
               {{type.display}}
           </label>
+            </div>
+          </div>
         </div>
+      </div> -->
+      <br>
+      <div class="form-group">
+        <label>Account Type:</label>
+        <select formControlName="accountType">
+                      <option *ngFor="let accountType of accountTypeList" [ngValue]="accountType">{{accountType}}</option>
+                    </select>
       </div>
     </div>
-    <div class="form-group"
-         [ngClass]="{'has-error':displayError.routing_number && bankInfoForm.controls['routing_number'].dirty}">
-        <div class="row">
-            <div class="col-xs-4" style="text-align:right;line-height:2em;">
-              <label for="routing_number">Routing Number</label>
-          </div>
-          <div class="col-xs-8">
-              <input type="text"
-                     name="routing_number"
-                     class="form-control"
-                     id="routing_number"
-                     maxlength="9"
-                     (blur)="validateRoutingNumber()"
-                     [formControl]="bankInfoForm.controls['routing_number']">
-              <p class="alert alert-danger" *ngIf="displayError.routing_number && bankInfoForm.controls['routing_number'].dirty">{{displayError.routing_number}}</p>
-          </div>
+    <div class="form-group" [ngClass]="{'has-error':displayError.routing_number && bankInfoForm.controls['routing_number'].dirty}">
+      <div class="row">
+        <div class="col-xs-4" style="text-align:right;line-height:2em;">
+          <label for="routing_number">Routing Number</label>
+        </div>
+        <div class="col-xs-8">
+          <input type="text" name="routing_number" class="form-control" id="routing_number" maxlength="9" (blur)="validateRoutingNumber()"
+            formControlName="routingNumber">
+          <p class="alert alert-danger" *ngIf="displayError.routing_number && bankInfoForm.controls['routing_number'].dirty">{{displayError.routing_number}}</p>
+        </div>
       </div>
     </div>
   </div>
   <div class="form-group">
     <div class="row" [ngClass]="{'has-error':displayError.accountNumber && bankInfoForm.controls['accountNumber'].dirty}">
       <div class="col-xs-4" style="text-align:right;line-height:2em;">
-         <label for="account-number">Account Number</label>
+        <label for="account-number">Account Number</label>
       </div>
       <div class="col-xs-8">
-          <input type="text"
-                 maxlength="15"
-                 name="account-number"
-                 class="form-control"
-                 id="account-number"
-                 (blur)="validateAccountNumber()"
-                 [formControl]="bankInfoForm.controls['accountNumber']">
-          <p class="alert alert-danger" *ngIf="displayError.accountNumber && bankInfoForm.controls['accountNumber'].dirty">{{displayError.accountNumber}}</p>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="row" [ngClass]="{'has-error':displayError.bankName && bankInfoForm.controls['bankName'].dirty}">
-      <div class="col-xs-4" style="text-align:right;line-height:2em;">
-         <label for="bank-name">Bank Name</label>
-      </div>
-      <div class="col-xs-8">
-         <input type="text"
-                name="bankname"
-                class="form-control"
-                id="bank-name"
-                maxlength="45"
-                (blur)="validateBankName()"
-                [formControl]="bankInfoForm.controls['bankName']">
-          <p class="alert alert-danger" *ngIf="displayError.bankName && bankInfoForm.controls['bankName'].dirty">Please input bank name.</p>
+        <input type="text" maxlength="15" name="account-number" class="form-control" formControlName="accountNumber" id="account-number"
+          (blur)="validateAccountNumber()" [formControl]="bankInfoForm.controls['accountNumber']">
+        <p class="alert alert-danger" *ngIf="displayError.accountNumber && bankInfoForm.controls['accountNumber'].dirty">{{displayError.accountNumber}}</p>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-4"></div>
     <div class="col-xs-8">
-        <img width="50%" src="modules/product-management/src/app/banking-widget/media/check_routing_account.png">
+      <img width="50%" src="modules/product-management/src/app/banking-widget/media/check_routing_account.png">
     </div>
   </div>
 
@@ -91,7 +69,7 @@
     <div class="row">
       <div class="col-xs-4"></div>
       <div class="col-xs-8">
-          <label>I authoriaze the Masssachusetts Mutual Life Insurance Company ("The Company") to debit {{customerInfo.premiumAmt| currency}}
+        <label>I authoriaze the Masssachusetts Mutual Life Insurance Company ("The Company") to debit {{customerInfo.premiumAmt| currency}}
         on a monthly basis beginning on {{customerInfo.effectiveDate | date}} from my bank account <span *ngIf="bankInfo.accountNumber">ending in {{bankInfo.accountNumber  | slice: -3}} </span>via Electronic Funds Transfer (EFT).
         This authorization will remain in effect until the Company receives notification of termination. I may revoke this authorization by calling {{customerInfo.helpLine}}
         or writing to {{customerInfo.helpAddr}}</label>
@@ -100,23 +78,20 @@
   </div>
 
   <div class="row">
-      <div class="col-xs-4" style="text-align:right;line-height:2em;">
-        <a href="javascript:void(0)">Cancel</a>
-      </div>
-      <div class="col-xs-8">
-          <button type="submit"
-                  class="btn btn-primary"
-                  style="width:80%;color:white;"
-                  [disabled]="!bankInfoForm.dirty || !enableSubmitButton()"
-                  (click)="updateBankInfo()">Authorize</button>
-      </div>
+    <div class="col-xs-4" style="text-align:right;line-height:2em;">
+      <a href="javascript:void(0)">Cancel</a>
+    </div>
+    <div class="col-xs-8">
+      <button type="submit" class="btn btn-primary" style="width:80%;color:white;" [disabled]="!bankInfoForm.dirty || !enableSubmitButton()"
+        (click)="updateBankInfo()">Authorize</button>
+    </div>
 
   </div>
 
   <div class="row" style="margin-top:25px">
-      <div class="col-xs-4"></div>
-      <div class="col-xs-8">
-        <a href="javascript:void(0)" onclick="window.open('modules/product-management/src/app/banking-widget/media/Premium_Payment_Terms_and_Conditions.pdf'); return false;">Premium Payment Service Term & Conditions</a>
-      </div>
+    <div class="col-xs-4"></div>
+    <div class="col-xs-8">
+      <a href="javascript:void(0)" onclick="window.open('modules/product-management/src/app/banking-widget/media/Premium_Payment_Terms_and_Conditions.pdf'); return false;">Premium Payment Service Term & Conditions</a>
+    </div>
   </div>
 </form>
