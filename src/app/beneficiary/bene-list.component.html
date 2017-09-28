@@ -2,12 +2,25 @@
 <label>Primary</label>
 <hr>
 {{currentBene | json}}
-<div *ngFor="let bene of beneList">
+<div *ngFor="let bene of primaryBeneList">
     <bene-individual [bene]="bene" (isDelBene)="delete($event)" (percent)="updatePercent($event)" ></bene-individual>
 </div>
 <hr>
 <div>
     <label>Total</label>
-    <label>{{totalPercent}}</label>
+    <label>{{totalPercentPrimary}}</label>
 </div>
-<a routerLink="/form" routerLinkActive="active">Add new beneficiary</a>
+<a routerLink="/form" routerLinkActive="active">Add new primary beneficiary</a>
+<br><br>
+<label>Contingent</label>
+<div *ngFor="let bene of contingentBeneList">
+    <bene-individual [bene]="bene" (isDelBene)="delete($event)" (percent)="updatePercent($event)" ></bene-individual>
+</div>
+<hr>
+<div>
+    <label>Total</label>
+    <label>{{totalPercentContingent}}</label>
+</div>
+<a routerLink="/form" routerLinkActive="active">Add new contingent beneficiary</a>
+<br><br>
+<button type="submit"> Save Changes</button> <a (click)="cancelChanges()" VALUE="Refresh">Cancel</a>
