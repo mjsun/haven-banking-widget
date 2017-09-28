@@ -38,6 +38,8 @@ export class BeneListComponent implements OnInit {
 
     delete(bene: any, type: string) {
         this.beneListService.deleteFromBeneList(bene, type);
+        this.totalPercentPrimary = this.allocatorService.getSubTotalPrimary();
+        this.totalPercentContingent = this.allocatorService.getSubTotalContingent();
     }
 
     updatePercent(bene?: iBene) {
