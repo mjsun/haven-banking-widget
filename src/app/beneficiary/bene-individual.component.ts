@@ -1,5 +1,6 @@
 import { Component, Input , Output, EventEmitter} from '@angular/core';
 
+
 @Component({
     moduleId: module.id,
     selector: 'bene-individual',
@@ -26,5 +27,6 @@ export class BeneIndividualComponent {
     updatePercent() {
         this.percent.emit(this.bene);
     }
+
 
 }

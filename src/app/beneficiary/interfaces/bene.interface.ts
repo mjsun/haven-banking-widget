@@ -1,13 +1,15 @@
 import {iAddress} from './address.interface';
 
 export interface iBene {
-    relationship: number,
+    relationship: any,
     otherRelationship?: string,
-    name: string,
+    certainMarriage?: string,
+    name?: string,
     address?: iAddress,
     phoneNumber?: string,
-    dateOfBirth?: string,
+    date?: string,
     ssn?: string,
     perStirpes?: boolean,
-    percent?: number
+    percent?: number,
+    type: string
 }

@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { iBene } from './interfaces/bene.interface';
 import { BeneListService } from './services/beneList.service';
 import { AllocatorService } from './services/allocator.service';
+import { ReactiveFormsModule } from '@angular/forms';  
+import { Router } from '@angular/router';
+
 @Component({
     moduleId: module.id,
     selector: 'bene-list',
@@ -10,26 +13,45 @@ import { AllocatorService } from './services/allocator.service';
     providers: [BeneListService, AllocatorService]
 })
 export class BeneListComponent implements OnInit {
-    beneList: Array<iBene>;
+    primaryBeneList: Array<iBene> = [];
+    contingentBeneList: Array<iBene> = [];
+    oldPrimaryBeneList:  Array<iBene> = [];
+    oldContingentBeneList: Array<iBene> = [];
     currentBene: iBene;
-    totalPercent: number;
-    constructor(private route: ActivatedRoute, private beneListService: BeneListService, private allocatorService: AllocatorService) {
-        this.beneList = this.beneList || this.beneListService.getBeneList();
+    totalPercentPrimary: number;
+    totalPercentContingent: number;
+
+    constructor(private route: ActivatedRoute, private beneListService: BeneListService, private allocatorService: AllocatorService, private router: Router) {
+        this.primaryBeneList = this.primaryBeneList || this.beneListService.getPrimaryBeneList();
+        this.contingentBeneList = this.contingentBeneList || this.beneListService.getContingentBeneList();
+        this.oldPrimaryBeneList = JSON.parse(JSON.stringify(this.primaryBeneList));
+       // console.log(this.oldPrimaryBeneList);
+        this.oldContingentBeneList = JSON.parse(JSON.stringify(this.contingentBeneList));
         this.updatePercent();
     }
 
     ngOnInit() {
-        this.beneList = this.beneListService.getBeneList();
+        this.primaryBeneList = this.beneListService.getPrimaryBeneList();
+        this.contingentBeneList = this.beneListService.getContingentBeneList();
+
     }
 
-    delete(bene: any) {
-        this.beneListService.deleteFromBeneList(bene);
+    delete(bene: any, type: string) {
+        this.beneListService.deleteFromBeneList(bene, type);
     }
 
     updatePercent(bene?: iBene) {
         this.currentBene = bene;
-        this.totalPercent = this.allocatorService.getSubTotal();
+        this.totalPercentPrimary = this.allocatorService.getSubTotalPrimary();
+        this.totalPercentContingent = this.allocatorService.getSubTotalContingent();
     }
 
+    cancelChanges(){
+     //   console.log(this.oldPrimaryBeneList);
+        this.primaryBeneList = this.oldPrimaryBeneList;
+        this.contingentBeneList = this.oldContingentBeneList;
+        this.totalPercentPrimary = this.allocatorService.getSubTotalPrimary();
+        this.totalPercentContingent = this.allocatorService.getSubTotalContingent();
+    }
 
 }

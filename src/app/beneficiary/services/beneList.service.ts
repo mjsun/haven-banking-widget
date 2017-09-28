@@ -3,10 +3,12 @@ import {iBene} from '../interfaces/bene.interface';
 
 @Injectable()
 export class BeneListService {
-    private static beneList: Array<iBene>;
+    private static primaryBeneList: Array<iBene> = [];
+    private static contingentBeneList: Array<iBene> = [];
+    private static currentBene: iBene;
 
     constructor() {
-        BeneListService.beneList = BeneListService.beneList || [{
+        BeneListService.primaryBeneList = BeneListService.primaryBeneList; /*|| [{
             relationship: 'spouse',
             name: 'bene1',
             address: {
@@ -16,7 +18,7 @@ export class BeneListService {
                 state: 'NY',
                 zipCode: '11102'},
             phoneNumber: '9170902345',
-            dateOfBirth: '09/09/1982',
+            date: '09/09/1982',
             ssn: '088989876',
             perStirpes: true,
             percent: 40
@@ -31,7 +33,7 @@ export class BeneListService {
                 state: 'NY',
                 zipCode: '11102'},
             phoneNumber: '9170902345',
-            dateOfBirth: '09/09/1982',
+            date: '09/09/1982',
             ssn: '088989876',
             perStirpes: true,
             percent: 30
@@ -46,23 +48,46 @@ export class BeneListService {
                 state: 'NY',
                 zipCode: '11102'},
             phoneNumber: '9170902345',
-            dateOfBirth: '09/09/1982',
+            date: '09/09/1982',
             ssn: '088989876',
             perStirpes: true,
             percent: 30
-        }];
+        }];  */
+    } 
+
+    getPrimaryBeneList() {
+        return BeneListService.primaryBeneList;
     }
 
-    getBeneList() {
-        return BeneListService.beneList;
+    getContingentBeneList() {
+        return BeneListService.contingentBeneList;
     }
 
-    addBeneList(bene: iBene) {
-        BeneListService.beneList.push(bene);
+    setCurrentBene(bene: iBene){
+        BeneListService.currentBene = bene;
     }
 
-    deleteFromBeneList(Bene: iBene) {
-        let beneIndex: number = BeneListService.beneList.indexOf(Bene);
-        BeneListService.beneList.splice(beneIndex, 1);
+    getCurrentBene(){
+        return BeneListService.currentBene as iBene;
+    }
+
+    addBeneList(bene: iBene, type: string) {
+        if(type === 'Primary'){
+            BeneListService.primaryBeneList.push(bene);
+        }
+        else {
+            BeneListService.contingentBeneList.push(bene);
+        }
+    }
+
+    deleteFromBeneList(Bene: iBene, type: string) {
+        if(type === 'Primary'){
+            let beneIndex: number = BeneListService.primaryBeneList.indexOf(Bene);
+            BeneListService.primaryBeneList.splice(beneIndex, 1);
+        }
+        else {
+            let beneIndex: number = BeneListService.contingentBeneList.indexOf(Bene);
+            BeneListService.contingentBeneList.splice(beneIndex, 1);
+        }
     }
 }

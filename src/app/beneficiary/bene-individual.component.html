@@ -1,6 +1,7 @@
 <div>
-    <label>{{bene.name}}</label>
+    <a routerLink="/form" (click)="setBene()">{{bene.name}}</a>
+    {{bene.relationship.description}}
     <input type="text" [(ngModel)]="bene.percent" (focus)="setBene()" (keyup)="updatePercent()">
     <span>or</span>
-    <a (click)="deleteBeneficiary()">delete beneficiary</a>
+    <a (click)="deleteBeneficiary(bene.type)">delete beneficiary</a>
 </div>

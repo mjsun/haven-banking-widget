@@ -10,8 +10,12 @@ export class AllocatorService {
 
     }
 
-    getSubTotal() {
-        let percentArr: Array<number> = this.beneListService.getBeneList().map(bene=>bene.percent);
+    getSubTotalPrimary() {
+        let percentArr: Array<number> = this.beneListService.getPrimaryBeneList().map(bene=>bene.percent);
+        return percentArr.reduce((a, b) => a*1 + b*1, 0);
+    }
+    getSubTotalContingent() {
+        let percentArr: Array<number> = this.beneListService.getContingentBeneList().map(bene=>bene.percent);
         return percentArr.reduce((a, b) => a*1 + b*1, 0);
     }
 }
