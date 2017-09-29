@@ -6,3 +6,4 @@ node_modules
 !systemjs.config.inapp.js
 .DS_Store
 .idea
+dist

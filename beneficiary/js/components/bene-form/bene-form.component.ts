@@ -1,16 +1,15 @@
 
-import { iBene } from './interfaces/bene.interface';
-import { BeneListService } from './services/beneList.service';
-import { BeneRelationService } from './services/beneRelation.service';
+import { iBene } from '../../interfaces/bene.interface';
+import { BeneListService } from '../../services/beneList.service';
+import { BeneRelationService } from '../../services/beneRelation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { Component, Input, OnChanges } from '@angular/core';
-import { ValidationService } from './validation.service';
+import { ValidationService } from '../../services/validation.service';
 
 
 @Component({
-    moduleId: module.id,
     selector: 'bene-form',
     templateUrl: './bene-form.component.html',
     providers: [BeneListService, BeneRelationService]
