@@ -69,6 +69,7 @@ export class BeneFormComponent {
             otherRelationship: [''],
             childrenType: [''],
             certainMarriage: [''],
+            children: this.fb.array([]),
             name: [this.bene.name, Validators.required],
             line1: [this.bene.address.line1, Validators.required],
             line2: [this.bene.address.line2],
@@ -102,10 +103,16 @@ export class BeneFormComponent {
     }
 
     addBeneToList(): void {
+        let relationship = this.beneForm.get('relationship').value;
+        if(relationship === 2){
+            //build up the child array
+            console.log(this.beneForm.get('name'));
+        }
         this.bene = {
-            relationship: this.beneForm.get('relationship').value,
+            relationship: relationship,
             otherRelationship: this.beneForm.get('otherRelationship').value,
             certainMarriage: this.beneForm.get('certainMarriage').value,
+            children: this.beneForm.get('secretLairs') as FormArray,
             name: this.beneForm.get('name').value != '' ? this.beneForm.get('name').value : this.relationship,
             address: {
                 line1: this.beneForm.get('line1').value,
@@ -148,7 +155,6 @@ export class BeneFormComponent {
                 break;
             }
             case 2: {
-                this.person = true;
                 this.children = true;
                 break;
             }
@@ -186,7 +192,7 @@ export class BeneFormComponent {
 
     addChild(){
         this.notRepeated = false;
-        var itm = document.getElementById("beneForm");
+        var itm = document.getElementById("childrenArray");
         var cln = itm.cloneNode(true);
         document.getElementById("repeatafterme").appendChild(cln);
     }
