@@ -2,10 +2,7 @@
 node_modules
 **/*.js
 **/*.js.map
-!systemjs.config.js
-!systemjs.config.inapp.js
+!dist/*.js
 !webpack/webpack.dev.js
-!app.bundle.js
-!vendor.bundle.js
 .DS_Store
 .idea

@@ -36,12 +36,12 @@ module.exports = {
         ]
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: 'bene.widget.[name].bundle.js',
         path: path.resolve(rootDir, 'dist')
     },
     plugins: [
         new ChunkWebpack({
-            filename: 'vendor.bundle.js',
+            filename: 'bene.widget.bundle.js',
             minChunks: Infinity,
             name: 'vendor'
         }),
