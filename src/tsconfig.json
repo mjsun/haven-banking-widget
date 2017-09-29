@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": [ "es2015", "dom" ],
+    "module": "commonjs",
+    "moduleResolution": "node",
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true
+    "types" : [ "node", "core-js" ],
+    "suppressImplicitAnyIndexErrors": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es6"
   },
   "exclude": [
     "node_modules",

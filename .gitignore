@@ -7,4 +7,3 @@ node_modules
 !webpack/webpack.dev.js
 .DS_Store
 .idea
-dist

@@ -14,8 +14,8 @@ module.exports = {
     },
     devtool: 'inline-source-ma',
     entry: {
-        app: [ path.resolve(rootDir, 'beneficiary', 'main.bene') ],
-        vendor: [ path.resolve(rootDir, 'beneficiary', 'vendor') ]
+        app: [ path.resolve(rootDir, 'src', 'main.bene') ],
+        vendor: [ path.resolve(rootDir, 'src', 'vendor') ]
     },
     module: {
         rules: [
@@ -48,7 +48,7 @@ module.exports = {
         new HtmlWebpack({
             filename: 'index.html',
             inject: 'body',
-            template: path.resolve(rootDir, 'beneficiary', 'index.html')
+            template: path.resolve(rootDir, 'src', 'index.html')
         })
     ],
     resolve: {
