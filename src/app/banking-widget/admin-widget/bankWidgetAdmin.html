@@ -18,18 +18,12 @@
         <div class="row">
             <div class="col-xs-4" style="text-align:left;line-height:2em;">
                 <label>Account Type</label>
-            </div>
-            <div *ngFor="let type of accountType">
+            </div>  
                 <div class="col-xs-3">
-                    <label class="radio-inline">
-                        <input type="radio"
-                               name="account-type"
-                               [formControl]="bankInfoForm.controls['accountType']"
-                               [value]="type.value">
-                        {{type.display}}
-                    </label>
-                </div>
-            </div>
+                        <select formControlName="accountType">
+                                <option *ngFor="let accountType of accountTypeList" [ngValue]="accountType">{{accountType}}</option>
+                              </select>
+                </div>        
         </div>
     </div>
     <div class="form-group"
@@ -45,7 +39,7 @@
                        id="routing_number"
                        maxlength="9"
                        (blur)="validateRoutingNumber()"
-                       [formControl]="bankInfoForm.controls['routing_number']">
+                       formControlName="routingNumber">
                 <p class="alert alert-danger" *ngIf="displayError.routing_number && bankInfoForm.controls['routing_number'].dirty">{{displayError.routing_number}}</p>
             </div>
         </div>
@@ -62,25 +56,8 @@
                        class="form-control"
                        id="account-number"
                        (blur)="validateAccountNumber()"
-                       [formControl]="bankInfoForm.controls['accountNumber']">
+                       FormControlName="accountNumber">
                 <p class="alert alert-danger" *ngIf="displayError.accountNumber && bankInfoForm.controls['accountNumber'].dirty">{{displayError.accountNumber}}</p>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row" [ngClass]="{'has-error':displayError.bankName && bankInfoForm.controls['bankName'].dirty}">
-            <div class="col-xs-4" style="text-align:left;line-height:2em;">
-                <label for="bank-name">Bank Name</label>
-            </div>
-            <div class="col-xs-8">
-                <input type="text"
-                       name="bankname"
-                       class="form-control"
-                       id="bank-name"
-                       maxlength="45"
-                       (blur)="validateBankName()"
-                       [formControl]="bankInfoForm.controls['bankName']">
-                <p class="alert alert-danger" *ngIf="displayError.bankName && bankInfoForm.controls['bankName'].dirty">Please input bank name.</p>
             </div>
         </div>
     </div>
@@ -90,7 +67,7 @@
                 <label for="notes">Notes</label>
       </div>
       <div class="col-xs-8">
-         <textarea name="notes" class="form-control" id="notes" [formControl]="bankInfoForm.controls['notes']"></textarea>
+         <textarea name="notes" class="form-control" id="notes" formControlName="notes"></textarea>
       </div>
     </div>
   </div>  

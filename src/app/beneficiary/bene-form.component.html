@@ -1,5 +1,5 @@
 <h2>{{type}} Beneficiary</h2>
-<form [formGroup]="beneForm">
+<form id="beneForm" [formGroup]="beneForm">
 
   <div class="form-group">
     <label>Relationship to You:</label>
@@ -7,8 +7,8 @@
                   <option *ngFor="let relationship of primaryRelationshipList" [ngValue]="relationship.code">{{relationship.description}}</option>
                 </select>
   </div>
-  <control-messages [control]="beneForm.controls.relationship"></control-messages>  
-  
+  <control-messages [control]="beneForm.controls.relationship"></control-messages>
+
   <div class="form-group" *ngIf="otherRelationshipList">
     <label>Other Relationship:</label>
     <select formControlName="otherRelationship">
@@ -16,14 +16,14 @@
     </select>
   </div>
 
-  <div class="form-group" *ngIf="children">
+    <div class="form-group" *ngIf="children">
       <label>Children Type:</label>
       <select formControlName="childrenType" (change)="getSelectedChildOption()">
           <option value="all">All lawful children</option>
           <option value="marriage">Children of a specific marriage</option>
       </select>
     </div>
-    
+
     <div class="form-group" *ngIf="specificChildren">
       <label class="center-block">Name of Other Parent:
           <input class="form-control" formControlName="certainMarriage">
@@ -31,21 +31,21 @@
           </label>
     </div>
     <div class="form-group" *ngIf="other">
-        <label class="center-block">Percent:
+      <label class="center-block">Percent:
             <input class="form-control" formControlName="percent">
               <control-messages [control]="beneForm.controls.percent"></control-messages>  
             </label>
-      </div>
-    
-  <div class="form-group" *ngIf="person || otherTrust">
-    <label class="center-block">Full Name:
+    </div>
+
+    <div class="form-group" *ngIf="person || otherTrust">
+      <label class="center-block">Full Name:
         <input class="form-control" formControlName="name">
           <control-messages [control]="beneForm.controls.name"></control-messages>  
         </label>
-  </div>
+    </div>
 
-  <div class="form-group" *ngIf="person || otherTrust ">
-    <label class="center-block">Address:
+    <div class="form-group" *ngIf="person || otherTrust ">
+      <label class="center-block">Address:
           <input class="form-control" formControlName="line1">
           <control-messages [control]="beneForm.controls.line1"></control-messages>  
           <input class="form-control" formControlName="line2">
@@ -107,62 +107,67 @@
           <input class="form-control" formControlName="zip">
             <control-messages [control]="beneForm.controls.zip"></control-messages>  
     </label>
-  </div>
+    </div>
 
 
-  <div class="form-group" *ngIf="person || otherTrust">
-    <label class="center-block">Phone Number:
+    <div class="form-group" *ngIf="person || otherTrust">
+      <label class="center-block">Phone Number:
             <input class="form-control" formControlName="phone">
             <control-messages [control]="beneForm.controls.phone"></control-messages>  
           </label>
-  </div>
+    </div>
 
-  <div class="form-group" *ngIf="person">
-    <label class="center-block">Date of Birth:
+    <div class="form-group" *ngIf="person">
+      <label class="center-block">Date of Birth:
             <input class="form-control" formControlName="birthday" type="date">
             <control-messages [control]="beneForm.controls.birthday"></control-messages>  
           </label>
-  </div>
+    </div>
 
-  <div class="form-group" *ngIf="otherTrust">
-    <label class="center-block">Date of Trust:
+    <div class="form-group" *ngIf="otherTrust">
+      <label class="center-block">Date of Trust:
             <input class="form-control" formControlName="trustDate" type="date">
             <control-messages [control]="beneForm.controls.trustDate"></control-messages>  
           </label>
-  </div>
+    </div>
 
-  <div class="form-group" *ngIf="person">
-    <label class="center-block">Social Security Number:
+    <div class="form-group" *ngIf="person">
+      <label class="center-block">Social Security Number:
             <input class="form-control" formControlName="ssn" required pattern="\d{3}[\-]\d{2}[\-]\d{4}">
             <control-messages [control]="beneForm.controls.ssn"></control-messages>  
           </label>
-  </div>
+    </div>
 
-  <div class="form-group radio" *ngIf="otherTrust">
-    <h4>SSN or TIN?:</h4>
-    <label class="center-block"><input type="radio" formControlName="ssnTin" value="ssn">SSN</label>
-    <label class="center-block"><input type="radio" formControlName="ssnTin" value="tin">TIN</label>
-  </div>
+    <div class="form-group radio" *ngIf="otherTrust">
+      <h4>SSN or TIN?:</h4>
+      <label class="center-block"><input type="radio" formControlName="ssnTin" value="ssn">SSN</label>
+      <label class="center-block"><input type="radio" formControlName="ssnTin" value="tin">TIN</label>
+    </div>
 
-  <div class="form-group" *ngIf="otherTrust">
-    <label class="center-block">Number ID:
+    <div class="form-group" *ngIf="otherTrust">
+      <label class="center-block">Number ID:
             <input class="form-control" formControlName="govtId" required pattern="\d{3}[\-]\d{2}[\-]\d{4}">
             <control-messages [control]="beneForm.controls.govtId"></control-messages>  
           </label>
-  </div>
+    </div>
 
-  <div class="form-group radio" *ngIf="person">
-    <h4>Per stirpes:</h4>
-    <h5>In the case of the beneficiary's death, would you like to distribute benefits equally amongst their decendants?</h5>
-    <label class="center-block"><input type="radio" formControlName="perStirpe" value="perstirpeYes">Yes</label>
-    <label class="center-block"><input type="radio" formControlName="perStirpe" value="perstirpeNo">No</label>
-  </div>
+    <div class="form-group radio" *ngIf="person">
+      <h4>Per stirpes:</h4>
+      <h5>In the case of the beneficiary's death, would you like to distribute benefits equally amongst their decendants?</h5>
+      <label class="center-block"><input type="radio" formControlName="perStirpe" value="perstirpeYes">Yes</label>
+      <label class="center-block"><input type="radio" formControlName="perStirpe" value="perstirpeNo">No</label>
+    </div>
 
-  <div class="form-group radio" *ngIf="person || otherTrust">
-    <h4>Allocate 100% to beneficiary?:</h4>
-    <label class="center-block"><input type="radio" formControlName="bene100" value="bene100Yes">Yes</label>
-    <label class="center-block"><input type="radio" formControlName="bene100" value="bene100No">No</label>
-  </div>
+    <div class="form-group radio" *ngIf="person || otherTrust">
+      <h4>Allocate 100% to beneficiary?:</h4>
+      <label class="center-block"><input type="radio" formControlName="bene100" value="bene100Yes">Yes</label>
+      <label class="center-block"><input type="radio" formControlName="bene100" value="bene100No">No</label>
+    </div>
 
+</form>
+  <div id=repeatafterme></div>
+      
+  <button type="submit" *ngIf="children" (click)="addChild();">Add child</button>
+  
 
-<button type="submit" *ngIf="other || person || children || otherTrust" (click)="addBeneToList(type);">Submit</button>  
+  <button type="submit" *ngIf="other || person || children || otherTrust" (click)="addBeneToList(type);">Submit</button>

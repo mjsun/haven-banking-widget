@@ -25,7 +25,6 @@ export class BeneListComponent implements OnInit {
         this.primaryBeneList = this.primaryBeneList || this.beneListService.getPrimaryBeneList();
         this.contingentBeneList = this.contingentBeneList || this.beneListService.getContingentBeneList();
         this.oldPrimaryBeneList = JSON.parse(JSON.stringify(this.primaryBeneList));
-       // console.log(this.oldPrimaryBeneList);
         this.oldContingentBeneList = JSON.parse(JSON.stringify(this.contingentBeneList));
         this.updatePercent();
     }
@@ -49,7 +48,6 @@ export class BeneListComponent implements OnInit {
     }
 
     cancelChanges(){
-     //   console.log(this.oldPrimaryBeneList);
         this.primaryBeneList = this.oldPrimaryBeneList;
         this.beneListService.setPrimaryBeneList(this.primaryBeneList);
         this.contingentBeneList = this.oldContingentBeneList;

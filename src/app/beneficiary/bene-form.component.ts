@@ -4,7 +4,7 @@ import { BeneListService } from './services/beneList.service';
 import { BeneRelationService } from './services/beneRelation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
 import { Component, Input, OnChanges } from '@angular/core';
 import { ValidationService } from './validation.service';
 
@@ -20,42 +20,47 @@ export class BeneFormComponent {
     primaryRelationshipList: Array<any>;
     otherRelationshipList: Array<any>;
     beneForm: FormGroup;
-    person : boolean;
-    children : boolean;
+    person: boolean;
+    children: boolean;
     certainChildren: boolean;
     other: boolean;
     otherTrust: boolean;
     specificChildren: boolean;
     relationship: string;
     type: string;
+    notRepeated: boolean = true;
 
-    constructor(private beneListService: BeneListService, private router: Router, private activatedRouter: ActivatedRoute , private beneRelationService: BeneRelationService, private fb: FormBuilder) {
-       // if (this.beneListService.getCurrentBene) {
-       //     this.bene  = this.beneListService.getCurrentBene();
-       // }
-       // else {
-            this.bene = {
-                relationship: 1,
-                otherRelationship: '',
-                name: '',
-                address: {
-                    line1: '',
-                    line2: '',
-                    city: '',
-                    state: '',
-                    zipCode: ''
-                },
-                phoneNumber: '',
-                date: '',
-                ssn: '',
-                perStirpes: true,
-                percent: 40,
-                type: this.type
-            };
-       // }
-       this.person = false;
+    constructor(private beneListService: BeneListService, private router: Router, private activatedRouter: ActivatedRoute, private beneRelationService: BeneRelationService, private fb: FormBuilder) {
+        // if (this.beneListService.getCurrentBene) {
+        //     this.bene  = this.beneListService.getCurrentBene();
+        // }
+        // else {
+        this.bene = {
+            relationship: 1,
+            otherRelationship: '',
+            name: '',
+            address: {
+                line1: '',
+                line2: '',
+                city: '',
+                state: '',
+                zipCode: ''
+            },
+            phoneNumber: '',
+            date: '',
+            ssn: '',
+            perStirpes: true,
+            percent: 40,
+            type: this.type
+        };
+        // }
+        this.person = false;
         this.primaryRelationshipList = this.beneRelationService.getOwnerInsuredRelations();
         this.createForm();
+    }
+
+    ngOnInit() {
+        this.type = this.activatedRouter.snapshot.data['type'];
     }
 
     createForm() {
@@ -75,7 +80,7 @@ export class BeneFormComponent {
             trustDate: [''],
             ssn: [this.bene.ssn, [Validators.required, ValidationService.ssnValidator]],
             govtId: [''],
-            ssnTin: ['ssn'],            
+            ssnTin: ['ssn'],
             perStirpe: ['perstirpeYes', Validators.required],
             bene100: ['bene100Yes', Validators.required],
             percent: ['', [Validators.required, ValidationService.percentValidator]]
@@ -83,7 +88,7 @@ export class BeneFormComponent {
     }
 
     setPercentageFull() {
-        if(this.beneForm.get('percent').value != ""){
+        if (this.beneForm.get('percent').value != "") {
             this.bene.percent = this.beneForm.get('percent').value;
         }
         else {
@@ -131,18 +136,18 @@ export class BeneFormComponent {
             }
         }
         this.otherRelationshipList = selectedOption.otherRelationships ? selectedOption.otherRelationships : null;
-       
+
         this.person = false;
         this.children = false;
         this.other = false;
         this.otherTrust = false;
         this.specificChildren = false;
         switch (selectedOption.code) {
-            case 1:{
+            case 1: {
                 this.person = true;
                 break;
             }
-            case 2:{
+            case 2: {
                 this.person = true;
                 this.children = true;
                 break;
@@ -164,10 +169,10 @@ export class BeneFormComponent {
         this.bene.otherRelationship = null;
 
     }
-    
-    getSelectedChildOption(){
+
+    getSelectedChildOption() {
         //here we pop up that text box to get the thing
-        if(this.beneForm.get('childrenType').value == "all"){
+        if (this.beneForm.get('childrenType').value == "all") {
             this.specificChildren = false;
         }
         else {
@@ -179,9 +184,10 @@ export class BeneFormComponent {
         this.bene.percent = 100;
     }
 
-    ngOnInit() {
-        this.type = this.activatedRouter.snapshot.data['type'];
-        console.log("Data via params: ",this.activatedRouter.snapshot.data['type']);
-        console.log("Data via params: ",this.activatedRouter.snapshot.data);
-      }
+    addChild(){
+        this.notRepeated = false;
+        var itm = document.getElementById("beneForm");
+        var cln = itm.cloneNode(true);
+        document.getElementById("repeatafterme").appendChild(cln);
+    }
 }

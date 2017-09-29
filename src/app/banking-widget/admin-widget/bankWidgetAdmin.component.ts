@@ -17,7 +17,7 @@ export class BankWidgetAdminComponent implements OnInit {
     public bankInfo : iBankingInfo ;
     public customerInfo : ICustomerInfoAdmin ;
     public policyNumber : string;
-    public accountType: any[];
+    public accountTypeList: string[] = ['Checking','Savings','Business Checking','Business Savings'];
     public confirmRead: boolean;
     public bankInfoForm: FormGroup;
     public displayError: any = {
@@ -49,21 +49,15 @@ export class BankWidgetAdminComponent implements OnInit {
             accountNumber: '',
             notes: ''
         };
-
-        this.accountType = [
-            {value: 'checking', display: 'Checking'},
-            {value: 'saving', display: 'Saving'}
-        ];
         
         this.confirmRead = false;
 
         this.bankInfoForm = fb.group({
-            'accountType': [null],
-            'routing_number':  [null],
-            'accountNumber': [null],
-            'bankName': [null],
-            'notes': [null],
-            'confirmRead': [false]
+            'accountType': [''],
+            'routingNumber':  [''],
+            'accountNumber': [''],
+            'notes': [''],
+            'confirmRead': ['']
         });
     }
 
@@ -80,8 +74,8 @@ export class BankWidgetAdminComponent implements OnInit {
     }
 
     validateRoutingNumber() {
-        let routingNumber = this.bankInfoForm.value['routing_number'];
-        if(this.bankInfoForm.controls['routing_number'].dirty) {
+        let routingNumber = this.bankInfoForm.value['routingNumber'];
+        if(this.bankInfoForm.controls['routingNumber'].dirty) {
             if (routingNumber === null || routingNumber.length !== 9) {
                 this.displayError.routing_number = 'Please enter 9 digit Routing Number.';
             }
@@ -105,18 +99,6 @@ export class BankWidgetAdminComponent implements OnInit {
             }
             else {
                 this.displayError.accountNumber = null;
-            }
-        }
-    }
-
-    validateBankName() {
-        let bankName = this.bankInfoForm.value['bankName'];
-        if(this.bankInfoForm.controls['bankName'].dirty) {
-            if(bankName === null || bankName.length === 0) {
-                this.displayError.bankName = 'Please enter Bank Name.'
-            }
-            else {
-                this.displayError.bankName = null;
             }
         }
     }

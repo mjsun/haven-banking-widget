@@ -8,6 +8,7 @@
       <div class="col-xs-8" style="padding-left: 0px">
         <span class="col-xs-7">{{customerInfo.accountHolder}}</span>
       </div>
+      </div>
    <!--   <div class="form-group">
         <div class="row">
           <div class="col-xs-4" style="text-align:right;line-height:2em;">
@@ -69,7 +70,7 @@
     <div class="row">
       <div class="col-xs-4"></div>
       <div class="col-xs-8">
-        <label>I authoriaze the Masssachusetts Mutual Life Insurance Company ("The Company") to debit {{customerInfo.premiumAmt| currency}}
+        <label>I authorize the Masssachusetts Mutual Life Insurance Company ("The Company") to debit {{customerInfo.premiumAmt| currency}}
         on a monthly basis beginning on {{customerInfo.effectiveDate | date}} from my bank account <span *ngIf="bankInfo.accountNumber">ending in {{bankInfo.accountNumber  | slice: -3}} </span>via Electronic Funds Transfer (EFT).
         This authorization will remain in effect until the Company receives notification of termination. I may revoke this authorization by calling {{customerInfo.helpLine}}
         or writing to {{customerInfo.helpAddr}}</label>
