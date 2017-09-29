@@ -5,5 +5,7 @@ node_modules
 !systemjs.config.js
 !systemjs.config.inapp.js
 !webpack/webpack.dev.js
+!app.bundle.js
+!vendor.bundle.js
 .DS_Store
 .idea
