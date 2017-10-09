@@ -13,5 +13,7 @@ export interface iBene {
     ssn?: string,
     perStirpes?: boolean,
     percent?: number,
-    type: string
+    type: string,
+    custodian?: string,
+    custodianState?: string
 }

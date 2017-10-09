@@ -45,6 +45,18 @@ export class BeneListComponent implements OnInit {
         this.currentBene = bene;
         this.totalPercentPrimary = this.allocatorService.getSubTotalPrimary();
         this.totalPercentContingent = this.allocatorService.getSubTotalContingent();
+        //TODO should this be handled by the front end stuff??
+        //let primaryPercent = document.getElementById('percentPrimary').innerText;
+      /*  if(this.totalPercentPrimary != 100){
+            //turn color red
+            document.getElementById('percentPrimary').style.color = '#ff0000';
+        }
+       // let contingentPercent = document.getElementById('percentContingent').innerText;
+        if(this.totalPercentContingent != 100.0){
+            //turn color red
+            document.getElementById('percentContingent').style.color = '#ff000';
+        }
+        */
     }
 
     cancelChanges(){

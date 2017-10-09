@@ -1,10 +1,7 @@
-import {iAddress} from './address.interface';
-
-export interface iChild {
-    name?: string,
-    address?: iAddress,
-    phoneNumber?: string,
-    dateOfBirth?: string,
-    ssn?: string,
-    perStirpes?: boolean,
+export class iChild {
+    name?: string = null;
+    phone?: string = null;
+    dateOfBirth?: string = null;
+    ssn?: string = null;
+    perStirpe?: boolean = null;
 }

@@ -16,38 +16,38 @@
     </select>
   </div>
 
-    <div class="form-group" *ngIf="children">
-      <label>Children Type:</label>
-      <select formControlName="childrenType" (change)="getSelectedChildOption()">
+  <div class="form-group" *ngIf="children">
+    <label>Children Type:</label>
+    <select formControlName="childrenType" (change)="getSelectedChildOption()">
           <option value="all">All lawful children</option>
           <option value="marriage">Children of a specific marriage</option>
       </select>
-    </div>
+  </div>
 
-    <div class="form-group" *ngIf="specificChildren">
-      <label class="center-block">Name of Other Parent:
+  <div class="form-group" *ngIf="specificChildren">
+    <label class="center-block">Name of Other Parent:
           <input class="form-control" formControlName="certainMarriage">
             <control-messages [control]="beneForm.controls.certainMarriage"></control-messages>  
           </label>
-    </div>
-    <div class="form-group" *ngIf="other">
-      <label class="center-block">Percent:
+  </div>
+  <div class="form-group" *ngIf="other">
+    <label class="center-block">Percent:
             <input class="form-control" formControlName="percent">
               <control-messages [control]="beneForm.controls.percent"></control-messages>  
             </label>
-    </div>
+  </div>
 
-    <div id="repeat">
 
-    <div class="form-group" *ngIf="person || otherTrust">
-      <label class="center-block">Full Name:
+
+  <div class="form-group" *ngIf="person || otherTrust">
+    <label class="center-block">Full Name:
         <input class="form-control" formControlName="name">
           <control-messages [control]="beneForm.controls.name"></control-messages>  
         </label>
-    </div>
+  </div>
 
-    <div class="form-group" *ngIf="person || otherTrust ">
-      <label class="center-block">Address:
+  <div class="form-group" *ngIf="person || otherTrust ">
+    <label class="center-block">Address:
           <input class="form-control" formControlName="line1">
           <control-messages [control]="beneForm.controls.line1"></control-messages>  
           <input class="form-control" formControlName="line2">
@@ -109,106 +109,54 @@
           <input class="form-control" formControlName="zip">
             <control-messages [control]="beneForm.controls.zip"></control-messages>  
     </label>
-    </div>
+  </div>
 
-    <div formArrayName="children" id="childrenArray" *ngIf="children">
+
+
+  <div formArrayName="childrenList" class="well well-lg" *ngIf="children">
+    <div *ngFor="let child of childrenList.controls; let i=index" [formGroupName]="i">
+      <!-- The repeated address template -->
+      <h4>Child #{{i + 1}}</h4>
+      <div style="margin-left: 1em;">
         <div class="form-group">
-            <label class="center-block">Full Name:
+          <label class="center-block">Name:
               <input class="form-control" formControlName="name">
-                <control-messages [control]="beneForm.controls.name"></control-messages>  
-              </label>
-          </div>
+            </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">Phone Number:
+              <input class="form-control" formControlName="phone">
+              <control-messages [control]="beneForm.controls.phone"></control-messages>  
+            </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">Birthday:
+              <input class="form-control" formControlName="dateOfBirth" type="date">
+            </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block" (blur)="formatSSN();">Social Security Number:
+              <input class="form-control" formControlName="ssn">
+            </label>
+        </div>
+        <div class="form-group radio">
+          <h4>Per stirpes:</h4>
+          <h5>In the case of the beneficiary's death, would you like to distribute benefits equally amongst their decendants?</h5>
+          <label class="center-block"><input type="radio" formControlName="perStirpe" checked value="perstirpeYes">Yes</label>
+          <label class="center-block"><input type="radio" formControlName="perStirpe" value="perstirpeNo">No</label>
+        </div>
+
+        <br>
+        <!-- End of the repeated address template -->
+      </div>
       
-          <div class="form-group">
-            <label class="center-block">Address:
-                <input class="form-control" formControlName="line1">
-                <control-messages [control]="beneForm.controls.line1"></control-messages>  
-                <input class="form-control" formControlName="line2">
-                <input class="form-control" formControlName="city">
-                <control-messages [control]="beneForm.controls.city"></control-messages>  
-                <select>
-                    <option value="AL">Alabama</option>
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                    <option value="AR">Arkansas</option>
-                    <option value="CA">California</option>
-                    <option value="CO">Colorado</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="DC">District Of Columbia</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="HI">Hawaii</option>
-                    <option value="ID">Idaho</option>
-                    <option value="IL">Illinois</option>
-                    <option value="IN">Indiana</option>
-                    <option value="IA">Iowa</option>
-                    <option value="KS">Kansas</option>
-                    <option value="KY">Kentucky</option>
-                    <option value="LA">Louisiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
-                    <option value="MA">Massachusetts</option>
-                    <option value="MI">Michigan</option>
-                    <option value="MN">Minnesota</option>
-                    <option value="MS">Mississippi</option>
-                    <option value="MO">Missouri</option>
-                    <option value="MT">Montana</option>
-                    <option value="NE">Nebraska</option>
-                    <option value="NV">Nevada</option>
-                    <option value="NH">New Hampshire</option>
-                    <option value="NJ">New Jersey</option>
-                    <option value="NM">New Mexico</option>
-                    <option value="NY">New York</option>
-                    <option value="NC">North Carolina</option>
-                    <option value="ND">North Dakota</option>
-                    <option value="OH">Ohio</option>
-                    <option value="OK">Oklahoma</option>
-                    <option value="OR">Oregon</option>
-                    <option value="PA">Pennsylvania</option>
-                    <option value="RI">Rhode Island</option>
-                    <option value="SC">South Carolina</option>
-                    <option value="SD">South Dakota</option>
-                    <option value="TN">Tennessee</option>
-                    <option value="TX">Texas</option>
-                    <option value="UT">Utah</option>
-                    <option value="VT">Vermont</option>
-                    <option value="VA">Virginia</option>
-                    <option value="WA">Washington</option>
-                    <option value="WV">West Virginia</option>
-                    <option value="WI">Wisconsin</option>
-                    <option value="WY">Wyoming</option>
-                  </select>	
-                <input class="form-control" formControlName="zip">
-                  <control-messages [control]="beneForm.controls.zip"></control-messages>  
-          </label>
-          </div>
-
-          <div class="form-group">
-              <label class="center-block">Phone Number:
-                    <input class="form-control" formControlName="phone">
-                    <control-messages [control]="beneForm.controls.phone"></control-messages>  
-                  </label>
-            </div>
-        
-            <div class="form-group">
-              <label class="center-block">Date of Birth:
-                    <input class="form-control" formControlName="birthday" type="date">
-                    <control-messages [control]="beneForm.controls.birthday"></control-messages>  
-                  </label>
-            </div>
-
-            <div class="form-group">
-                <label class="center-block">Social Security Number:
-                      <input class="form-control" formControlName="ssn" required pattern="\d{3}[\-]\d{2}[\-]\d{4}">
-                      <control-messages [control]="beneForm.controls.ssn"></control-messages>  
-                    </label>
-              </div>
+    </div>
+    <button type="submit" (click)="addChild();">Add child</button>
     </div>
 
     <div class="form-group" *ngIf="person || otherTrust">
       <label class="center-block">Phone Number:
-            <input class="form-control" formControlName="phone">
+            <input class="form-control" id="phone" formControlName="phone" (blur)="formatPhone();">
             <control-messages [control]="beneForm.controls.phone"></control-messages>  
           </label>
     </div>
@@ -229,7 +177,7 @@
 
     <div class="form-group" *ngIf="person">
       <label class="center-block">Social Security Number:
-            <input class="form-control" formControlName="ssn" required pattern="\d{3}[\-]\d{2}[\-]\d{4}">
+            <input class="form-control" id="ssn" (blur)="formatSSN();" formControlName="ssn" required pattern="\d{3}[\-]\d{2}[\-]\d{4}">
             <control-messages [control]="beneForm.controls.ssn"></control-messages>  
           </label>
     </div>
@@ -253,16 +201,14 @@
       <label class="center-block"><input type="radio" formControlName="perStirpe" value="perstirpeYes">Yes</label>
       <label class="center-block"><input type="radio" formControlName="perStirpe" value="perstirpeNo">No</label>
     </div>
+  
+  <div class="form-group radio" *ngIf="person || otherTrust">
+    <h4>Allocate 100% to beneficiary?:</h4>
+    <label class="center-block"><input type="radio" formControlName="bene100" value="bene100Yes">Yes</label>
+    <label class="center-block"><input type="radio" formControlName="bene100" value="bene100No">No</label>
   </div>
-    <div class="form-group radio" *ngIf="person || otherTrust">
-      <h4>Allocate 100% to beneficiary?:</h4>
-      <label class="center-block"><input type="radio" formControlName="bene100" value="bene100Yes">Yes</label>
-      <label class="center-block"><input type="radio" formControlName="bene100" value="bene100No">No</label>
-    </div>
+
 
 </form>
-  <div id=repeatafterme></div>
-      
-  <button type="submit" *ngIf="children" (click)="addChild();">Add child</button>
-  
-  <button type="submit" *ngIf="other || person || children || otherTrust" (click)="addBeneToList(type);">Submit</button>
+
+<button type="submit" *ngIf="other || person || children || otherTrust" (click)="addBeneToList(type);">Submit</button>

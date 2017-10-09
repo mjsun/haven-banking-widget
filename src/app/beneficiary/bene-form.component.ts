@@ -1,5 +1,6 @@
 
 import { iBene } from './interfaces/bene.interface';
+import { iChild } from './interfaces/child.interface';
 import { BeneListService } from './services/beneList.service';
 import { BeneRelationService } from './services/beneRelation.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -15,6 +16,7 @@ import { ValidationService } from './validation.service';
     templateUrl: './bene-form.component.html',
     providers: [BeneListService, BeneRelationService]
 })
+
 export class BeneFormComponent {
     bene: iBene;
     primaryRelationshipList: Array<any>;
@@ -22,23 +24,19 @@ export class BeneFormComponent {
     beneForm: FormGroup;
     person: boolean;
     children: boolean;
-    certainChildren: boolean;
     other: boolean;
     otherTrust: boolean;
     specificChildren: boolean;
     relationship: string;
     type: string;
-    notRepeated: boolean = true;
+    otherPerson: boolean;
 
     constructor(private beneListService: BeneListService, private router: Router, private activatedRouter: ActivatedRoute, private beneRelationService: BeneRelationService, private fb: FormBuilder) {
-        // if (this.beneListService.getCurrentBene) {
-        //     this.bene  = this.beneListService.getCurrentBene();
-        // }
-        // else {
         this.bene = {
             relationship: 1,
             otherRelationship: '',
             name: '',
+            children: [],
             address: {
                 line1: '',
                 line2: '',
@@ -69,7 +67,7 @@ export class BeneFormComponent {
             otherRelationship: [''],
             childrenType: [''],
             certainMarriage: [''],
-            children: this.fb.array([]),
+            childrenList: this.fb.array([]),
             name: [this.bene.name, Validators.required],
             line1: [this.bene.address.line1, Validators.required],
             line2: [this.bene.address.line2],
@@ -84,12 +82,17 @@ export class BeneFormComponent {
             ssnTin: ['ssn'],
             perStirpe: ['perstirpeYes', Validators.required],
             bene100: ['bene100Yes', Validators.required],
-            percent: ['', [Validators.required, ValidationService.percentValidator]]
+            percent: ['', [Validators.required, ValidationService.percentValidator]],
+            custodian: ['']
         });
+        let childList: iChild[] = [];
+        const childFGs = childList.map(child => this.fb.group(child));
+        const childFormArray = this.fb.array(childFGs);
+        this.beneForm.setControl('childrenList', childFormArray);
     }
 
     setPercentageFull() {
-        if (this.beneForm.get('percent').value != "") {
+        if (this.beneForm.get('percent').value != '') {
             this.bene.percent = this.beneForm.get('percent').value;
         }
         else {
@@ -102,17 +105,17 @@ export class BeneFormComponent {
         this.createForm();
     }
 
+    get childrenList(): FormArray {
+        return this.beneForm.get('childrenList') as FormArray;
+    };
+
     addBeneToList(): void {
         let relationship = this.beneForm.get('relationship').value;
-        if(relationship === 2){
-            //build up the child array
-            console.log(this.beneForm.get('name'));
-        }
         this.bene = {
             relationship: relationship,
             otherRelationship: this.beneForm.get('otherRelationship').value,
             certainMarriage: this.beneForm.get('certainMarriage').value,
-            children: this.beneForm.get('secretLairs') as FormArray,
+            children: this.makeChildList(),
             name: this.beneForm.get('name').value != '' ? this.beneForm.get('name').value : this.relationship,
             address: {
                 line1: this.beneForm.get('line1').value,
@@ -126,7 +129,10 @@ export class BeneFormComponent {
             ssn: this.beneForm.get('ssn').value,
             perStirpes: this.beneForm.get('perStirpe').value == "perstirpeYes" ? true : false,
             percent: 0,
-            type: this.type
+            type: this.type,
+            custodian: this.beneForm.get('custodian').value
+            //TODO
+            //custodianState: "Maryland"
         };
         this.setPercentageFull();
         this.beneListService.addBeneList(this.bene, this.type);
@@ -147,6 +153,7 @@ export class BeneFormComponent {
         this.person = false;
         this.children = false;
         this.other = false;
+        this.otherPerson = false;
         this.otherTrust = false;
         this.specificChildren = false;
         switch (selectedOption.code) {
@@ -160,6 +167,7 @@ export class BeneFormComponent {
             }
             case 3: {
                 this.person = true;
+                this.otherPerson = true;
                 break;
             }
             case 4:
@@ -176,9 +184,22 @@ export class BeneFormComponent {
 
     }
 
+    makeChildList() {
+        let toReturn: iChild[] = [];
+        for (let i = 0; i < this.beneForm.get('childrenList').value.length; i++) {
+            toReturn.push({
+                name: this.beneForm.get('childrenList').value[i].name,
+                ssn: this.beneForm.get('childrenList').value[i].ssn,
+                dateOfBirth: this.beneForm.get('childrenList').value[i].dateOfBirth,
+                phone: this.beneForm.get('childrenList').value[i].phone,
+                perStirpe: this.beneForm.get('childrenList').value[i].perStirpe
+            });
+        }
+        return toReturn;
+    }
     getSelectedChildOption() {
         //here we pop up that text box to get the thing
-        if (this.beneForm.get('childrenType').value == "all") {
+        if (this.beneForm.get('childrenType').value == 'all') {
             this.specificChildren = false;
         }
         else {
@@ -190,10 +211,27 @@ export class BeneFormComponent {
         this.bene.percent = 100;
     }
 
-    addChild(){
-        this.notRepeated = false;
-        var itm = document.getElementById("childrenArray");
-        var cln = itm.cloneNode(true);
-        document.getElementById("repeatafterme").appendChild(cln);
+    addChild() {
+        this.childrenList.push(this.fb.group(new iChild()));
+    }
+
+    formatPhone() {
+        let phoneNum = this.beneForm.get('phone');
+        let numbers = phoneNum.value.replace(/\D/g, '');
+        if (numbers.length == 10) {
+            (<HTMLInputElement>document.getElementById('phone')).value = '(' + numbers.substring(0, 3) + ') ' + numbers.substring(3, 6) + '-' + numbers.substring(6);
+        }
+        else if(numbers.length == 11){
+            (<HTMLInputElement>document.getElementById('phone')).value = numbers.charAt(0) + '(' + numbers.substring(1, 4) + ') ' + numbers.substring(4, 7) + '-' + numbers.substring(7);            
+        }
+        else if(numbers.length > 11){
+            (<HTMLInputElement>document.getElementById('phone')).value = '(' + numbers.substring(0, 3) + ') ' + numbers.substring(3, 6) + '-' + numbers.substring(6, 10)+' x'+numbers.substring(10);
+        }
+    }
+
+    formatSSN() {
+        let ssnNum = this.beneForm.get('ssn');
+        let numbers = ssnNum.value.replace(/\D/g, '');
+        (<HTMLInputElement>document.getElementById('ssn')).value = numbers.substring(0, 3) + '-' + numbers.substring(3, 5) + '-' + numbers.substring(5);
     }
 }
